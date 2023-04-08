@@ -1,6 +1,7 @@
-CREATE TABLE purchases (
+CREATE TABLE orders (
  id SERIAL PRIMARY KEY NOT NULL,
  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
  product_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
- created_at TIMESTAMP NOT NULL
+ purchase_time TIMESTAMP NOT NULL
+ purchased
 );
