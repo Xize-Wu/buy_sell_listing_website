@@ -1,10 +1,9 @@
--- individual messages in the sessions
+DROP TABLE IF EXISTS favourites CASCADE;
 
-CREATE TABLE messages (
+CREATE TABLE favourites (
  id SERIAL PRIMARY KEY NOT NULL,
  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
  product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
- message TEXT,
- time TIMESTAMP
+ created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ deleted_at TIMESTAMP
 );
-

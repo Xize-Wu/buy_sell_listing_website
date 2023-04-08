@@ -1,6 +1,6 @@
 -- Create the product table and list fake products
 -- Conditions: new; very good; good; fair; poor
---Categories: fantasy; science fiction; romance; auto-biography; health
+-- Categories: fantasy; science fiction; romance; auto-biography; health
 
 DROP TABLE IF EXISTS products CASCADE;
 
