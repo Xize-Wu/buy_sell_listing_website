@@ -7,3 +7,5 @@ CREATE TABLE reviews (
  rating SMALLINT NOT NULL,
  message TEXT
 );
+
+-- This is extra feature
