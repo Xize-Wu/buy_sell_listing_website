@@ -8,7 +8,7 @@ const getUsers = () => {
 };
 
 const getAllProducts = (options, limit = 10) => {
-  return pool.query(`
+  return db.query(`
   SELECT users.name, title, picture_url, price, condition, category, products.created_at as posted_time
   FROM products
   JOIN users ON user_id = users.id

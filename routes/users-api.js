@@ -10,9 +10,10 @@ const router  = express.Router();
 const userQueries = require('../db/queries/users');
 
 router.get('/', (req, res) => {
-  userQueries.getUsers()
-    .then(users => {
-      res.json({ users });
+  userQueries.getAllProducts()
+    .then(products => {
+      console.log(products)
+      res.render('index', products)
     })
     .catch(err => {
       res
