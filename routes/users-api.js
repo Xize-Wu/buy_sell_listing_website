@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   userQueries.getAllProducts()
     .then(products => {
       console.log(products)
-      res.render('index', products)
+      res.render('index', {products})
     })
     .catch(err => {
       res
