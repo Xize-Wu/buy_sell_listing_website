@@ -6,14 +6,18 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const userQueries = require('../db/queries/users');
 
 // Home route
 router.get('/', (req, res) => {
   userQueries.getAllProducts()
     .then(products => {
-      res.render('index', {products})
+      const templateVars = {
+        products,
+        username: req.session.username
+      };
+      res.render('index', templateVars);
     })
     .catch(err => {
       res
