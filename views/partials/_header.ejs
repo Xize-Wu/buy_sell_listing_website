@@ -1,0 +1,51 @@
+<header>
+  <nav id="navbar" class="navbar">
+    <div>
+      <a class="navbar-brand" href="/">Brand Name</a>
+      <a class="navbar-home" href="/">🏠</a>
+      <a class="navbar-search" href="/search">Search</a>
+
+    </div>
+
+    <div>
+      <% if (username) { %>
+        <!-- login state -->
+        <a id="navbar-order" href="/order">Order History</a>
+        <a id="navbar-my-list" href="/myLists">My Listings</a>
+
+        <form method="POST" action="/create">
+          <button type="submit">Sell</button>
+        </form>
+
+        <form method="POST" action="/message">
+          <button type="submit">Message</button>
+        </form>
+
+
+        <form method="POST" action="/checkout">
+          <button type="submit">Shopping Cart</button>
+        </form>
+
+        <form method="POST" action="/favourite">
+          <button type="submit">Favourite</button>
+        </form>
+
+        <h5>Hello, <%= username %>!</h5>
+
+        <form method="POST" action="/logout">
+          <button type="submit">Logout</button>
+        </form>
+
+        <% } else { %>
+          <!-- logout state-->
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a id="navbar-login" href="/login">Log In</a>
+              <a id="navbar-sign-up" href="/register">Sign Up</a>
+            </div>
+            <% } %>
+          </div>
+
+  </nav>
+</header>
+
