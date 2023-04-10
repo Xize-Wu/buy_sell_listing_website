@@ -8,30 +8,31 @@ const getAllProducts = (options, limit = 10) => {
   GROUP BY users.name, title, picture_url, price, condition, category, posted_time
   ORDER BY posted_time DESC;
   `)
-  .then ((result) => {
-    return result.rows;
-  })
-  .catch ((error) => {
-    console.log(error);
-  })
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
-const getUserWithEmail = function (email) {
+const getUserWithEmail = function(email) {
   return db.query(`SELECT * FROM users WHERE email = $1`, [email.toLowerCase()])
-  .then ((result) => {
-   return result.rows[0]})
-  .catch(error => {
-    return error;
-  })
- };
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch(error => {
+      return error;
+    });
+};
 
 const storeUserInformation = function(name, email, password) {
   return db
-  .query(`
+    .query(`
   INSERT INTO users (name, email, password)
-  VALUES ($1, $2, $3)`,
-  [name, email, password]
-  )
-}
+  VALUES ($1, $2, $3) RETURNING *`,
+      [name, email, password]
+    );
+};
 
 module.exports = { getAllProducts, getUserWithEmail, storeUserInformation };
