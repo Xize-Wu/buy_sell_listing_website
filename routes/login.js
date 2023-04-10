@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
       return res.redirect('/');
     }
 
-
+    // set session with user id
     req.session.user_id = result.id;
     res.redirect('/');
   })

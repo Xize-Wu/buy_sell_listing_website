@@ -9,32 +9,43 @@ router.use(cookieSession({
   keys: ['key1', 'key2']
 }));
 
-// 2. Create register form
+// 2. Post register form
 router.post('/',(req, res) => {
   const { name, email, password } = req.body;
+  
+  userQueries.getUserWithEmail(email)
+  .then((result) => {
 
-  res.send('Registration sucessful');
+    if (result) {
+      res.status(400).send(`Error 400: Sorry, that user already exists!`);
+      return;
+    }
+
+    // if (email === '' || password === '') {
+    //   res.status(400).send(`Error 400: You left some fields empty. Try again!`);
+    //   return;
+    // }
+
+    // Create a new user in the database when they register
+    userQueries.storeUserInformation(name, email, password)
+    .then((result) => {
+      req.session.user_id = result.id;
+      res.redirect('/');
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  })
+  .catch((error) => {
+    console.log(error.message);
+  })
 });
 
+// Display the register page
+router.get('/', (req, res) => {
 
 
-app.post('/register', (req, res) => {
-  // extract info
-  const { email, password } = req.body;
+  res.render('register', req)
+})
 
-  // validation => does that user already exist in the userDatabase
-  const user = findUserbyEmail(email, usersDatabase);
-
-  if (user) {
-    res.status(400).send(`Error 400: Sorry, that user already exists!`);
-    return;
-  }
-
-  // check if email or password are empty strings => if they are, respond with error code
-  if (email === '' || password === '') {
-    res.status(400).send(`Error 400: Oops! You left some fields empty. Try again!`);
-    return;
-  }
-
-
-  module.exports = router;
+module.exports = router;
