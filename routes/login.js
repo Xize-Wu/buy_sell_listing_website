@@ -21,7 +21,7 @@ router.use(cookieSession({
 }));
 
 
-// Log a user in
+// 1. Log a user in
 router.post('/', (req, res) => {
   const { email, password } = req.body;
 
@@ -50,6 +50,7 @@ router.post('/', (req, res) => {
   })
 
 });
+
 
 //Login GET route
 router.get('/', (req, res) => {
