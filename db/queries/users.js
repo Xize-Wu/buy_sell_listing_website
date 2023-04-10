@@ -17,13 +17,11 @@ const getAllProducts = (options, limit = 10) => {
 };
 
 const getUserWithEmail = function (email) {
-  console.log("email", email)
-  return db.query(`SELECT * FROM users WHERE email = $1`, [email])
+  return db.query(`SELECT * FROM users WHERE email = $1`, [email.toLowerCase()])
   .then ((result) => {
-  console.log(result.rows);
    return result.rows[0]})
   .catch(error => {
-   console.log(error.message)
+    return error;
   })
  };
 
