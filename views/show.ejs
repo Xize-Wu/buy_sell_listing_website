@@ -3,58 +3,54 @@
 <head>
   <!-- Head missing -->
   <meta charset="UTF-8">
-  <title>Book Title and name of the website</title>
+  <title><%= title %></title>
 
 <!-- CSS (load bootstrap from a CDN) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body class="container">
 
-<header>
+
+
+  <header>
   <!-- Header missing -->
-</header>
-
-<main>
-  <div id ="main-picture">
-  <img alt = "main picture for the book on sale" src = "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/51ebKPoViIL._SY478_BO1,204,203,200_.jpg">
-  </div>
-  <section class="main-properties">
-    <div id ="item-title">A Song of Ice and Fire</div>
-    <div id ="item-price">70 $</div>
-    <div id ="seller">Gandalf the Grey</div>
-    <div class = "button" id ="message-button"><button type="submit">Message Me</button></div>
-    <div class ="button" id="purchase-button"><button type="submit" name="add-to-cart" value="product-id">Buy Now</button>
+  </header>
+  <main>
+    <div id ="main-picture">
+    <img alt = "main picture for the book on sale" src = <%= pictureUrl %>>
     </div>
- </section>
- <section class="description">
-  <div id="description">
-    <p>This is the description</p>
-  </div>
-  <!-- <div class="minor-properties">
-    <div id="condition"><p>poor</p></div>
-    <div id="category"><p>Fantasy</p></div>
-    <div id="stocknumber"><p>1 available</p></div>
-  </div> -->
+    <section class="main-properties">
+      <div id ="item-title"><%= title %></div>
+      <div id ="item-price"><%= price %> </div>
+      <div id ="seller"><%= seller %></div>
+      <div class = "button" id ="message-button"><button type="submit">Message Me</button></div>
+      <div class ="button" id="purchase-button"><button type="submit" name="add-to-cart" value="product-id">Buy Now</button>
+      </div>
+    </section>
+    <section class="description">
+    <div id="description">
+      <%= description %>
+    </div>
 
-  <div class="minor-properties">
-    <table>
-      <tr class = "condition">
-        <td>Poor</td>
-      </tr>
-      <tr class = "category">
-        <td>Fantasy</td>
-      </tr>
-      <tr class = "stock">
-        <td>1 available</td>
-      </tr>
-    </table>
-  </div>
- </section>
-</main>
+    <div class="minor-properties">
+      <table>
+        <tr class = "condition">
+          <td> <%= condition %></td>
+        </tr>
+        <tr class = "category">
+          <td><%= category %></td>
+        </tr>
+        <!-- <tr class = "stock">
+          <td>1 available</td>
+        </tr> -->
+      </table>
+    </div>
+    </section>
+    </main>
 
-<footer>
-  <!-- Footer missing -->
-</footer>
+  <footer>
+    <!-- Footer missing -->
+  </footer>
 
 </body>
 </html>
