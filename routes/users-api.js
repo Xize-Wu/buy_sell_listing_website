@@ -9,10 +9,10 @@ const express = require('express');
 const router  = express.Router();
 const userQueries = require('../db/queries/users');
 
+// Home route
 router.get('/', (req, res) => {
   userQueries.getAllProducts()
     .then(products => {
-      console.log(products)
       res.render('index', {products})
     })
     .catch(err => {
