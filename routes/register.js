@@ -33,7 +33,17 @@ router.post('/', (req, res) => {
 
 // Display the register page
 router.get('/', (req, res) => {
-  res.render('register');
+  const user_name = req.session.username;
+
+  if (user_name) {
+    return res.render('/');
+  }
+
+  const templateVars = { username: user_name };
+
+  res.render('register', templateVars);
 });
+
+
 
 module.exports = router;

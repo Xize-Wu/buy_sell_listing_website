@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
       res.redirect('/');
     })
     .catch((error) => {
-      console.log(error.message);
+      console.log(error.messxage);
     });
 });
 
@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
     return res.render('/');
   }
 
-  const templateVars = { 'user': user_name };
+  const templateVars = { username: user_name };
 
   res.render('login', templateVars);
 });
