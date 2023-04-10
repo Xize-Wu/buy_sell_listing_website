@@ -26,4 +26,9 @@ router.get('/', (req, res) => {
     });
 });
 
+// Orders History route
+router.get('/orders', (req, res) => {
+  res.render('orders', req);
+})
+
 module.exports = router;

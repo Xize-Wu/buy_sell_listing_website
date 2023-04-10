@@ -50,6 +50,7 @@ app.use('/users', usersRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
+app.use('/orders', userApiRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
