@@ -35,14 +35,38 @@ const storeUserInformation = function(name, email, password) {
     );
 };
 
+const getAllOrders = function() {
+  return db.query(`
+  SELECT orders.id, orders.purchase_time, products.title, products.picture_url, products.price
+  FROM orders
+  JOIN products ON product_id = products.id
+  JOIN users ON user_id = users.id
+  GROUP BY orders.id, orders.purchase_time, products.title, products.picture_url, products.price
+  ORDER BY purchase_time DESC;
+  `)
+  .then((result) => {
+    console.log(result);
+    return result;
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+}
+
+getAllProducts();
+
+// userId
+// WHERE users.id = $1
+// [userId]
+
 // Retrieve orders table
 // -- show list of orders for users who already purchased the products, this should appear on their order history page
 
-// SELECT users.name, products.title, products.price, purchase_time
+// SELECT orders products.title, products.price, purchase_time
 // FROM orders
 // JOIN users ON user_id = users.id
 // JOIN products ON product_id = products.id
 // GROUP BY users.name, products.title, products.price, purchase_time
 // ORDER BY purchase_time DESC;
 
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation };
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders };

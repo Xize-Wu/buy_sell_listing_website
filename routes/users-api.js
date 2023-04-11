@@ -28,7 +28,8 @@ router.get('/', (req, res) => {
 
 // Orders History route
 router.get('/orders', (req, res) => {
-  res.render('orders', req);
+
+  res.render('orders');
 })
 
 module.exports = router;
