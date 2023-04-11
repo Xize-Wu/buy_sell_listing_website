@@ -32,11 +32,16 @@ router.post('/search', (req, res) => {
 
   const { book_title, minimum_price, maximum_price } = req.body;
 
-  // userQueries.searchBooksByPrice(book_title, minimum_price, maximum_price)
-  userQueries.searchBooksByPrice(req.body)
-  .then ((result) => {
-
-  })
+  //  userQueries.searchBooksByPrice(book_title, minimum_price, maximum_price)
+   userQueries.searchBooksByPrice(req.body)
+  .then ((products) => {
+    console.log("show something", products)
+      const templateVars = {
+        products,
+        username: req.session.username
+      };
+      res.render('product', templateVars);
+    })
   .catch((error) => {
     console.log(error);
   })
@@ -45,5 +50,10 @@ router.post('/search', (req, res) => {
 router.get('/search', (req, res) => {
   res.render('search');
 });
+
+// router.get('/product', (req, res) =>
+// {
+//   res.render('product');
+// })
 
 module.exports = router;
