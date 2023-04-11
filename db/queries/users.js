@@ -43,11 +43,12 @@ const searchBooksByPrice = function (options, limit = 10) {
   SELECT users.name, title, picture_url, price, condition, category, products.created_at as posted_time
   FROM products
   JOIN users ON user_id = users.id
+  WHERE 1=1
   `;
 
   if (options.book_title) {
     queryParams.push(`%${options.book_title}%`);
-    queryString += `WHERE title LIKE $${queryParams.length}`;
+    queryString += `AND title LIKE $${queryParams.length}`;
   }
 
   if (options.minimum_price) {
@@ -56,8 +57,8 @@ const searchBooksByPrice = function (options, limit = 10) {
   }
 
   if (options.maximum_price) {
-    queryParams.push(options.minimum_price);
-    queryString += `AND price <= $${queryParams.length}`;
+    queryParams.push(options.maximum_price);
+    queryString += ` AND price <= $${queryParams.length}`;
   }
 
   queryParams.push(limit);
@@ -67,8 +68,12 @@ const searchBooksByPrice = function (options, limit = 10) {
   LIMIT $${queryParams.length};
   `;
 
-  console.log(queryString, queryParams);
-
+  console.log(queryString, queryParams, options);
+/*
+  SELECT users.name, title, picture_url, price, condition, category, products.created_at as posted_time
+  FROM products
+  JOIN users ON user_id = users.id WHERE title LIKE $${options.book_title} ORDER BY posted_time DESC LIMIT 10;
+*/ 
   return db.query(queryString, queryParams)
     .then((result) => {
       console.log(result.rows);
@@ -76,6 +81,7 @@ const searchBooksByPrice = function (options, limit = 10) {
     })
     .catch((error) =>
       console.log(error.message));
+      return [];
 };
 
 module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, searchBooksByPrice };
