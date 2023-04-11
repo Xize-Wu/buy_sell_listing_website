@@ -27,4 +27,30 @@ router.get('/', (req, res) => {
     });
 });
 
+// search form
+router.post('/search', (req, res) => {
+
+  const { book_title, minimum_price, maximum_price } = req.body;
+
+  userQueries.searchBooksByPrice(book_title, minimum_price, maximum_price)
+  .then ((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+
+  // userQueries.searchBookByPrice(title, minimum_price, maximum_price)
+  // .then((result) => {
+  //   res.redirect('/');
+  // })
+  // .catch((error) => {
+  //   console.log(error);
+  // })
+});
+
+router.get('/search', (req, res) => {
+  res.render('search');
+});
+
 module.exports = router;
