@@ -35,15 +35,16 @@ const storeUserInformation = function(name, email, password) {
     );
 };
 
-const getAllOrders = function() {
+const getAllOrders = function(userId) {
   return db.query(`
   SELECT orders.id, orders.purchase_time, products.title, products.picture_url, products.price
   FROM orders
   JOIN products ON orders.product_id = products.id
   JOIN users ON orders.user_id = users.id
+  WHERE users.id = $1
   GROUP BY orders.id, orders.purchase_time, products.title, products.picture_url, products.price
   ORDER BY purchase_time DESC;
-  `)
+  `, [userId])
   .then((result) => {
     return result.rows;
   })
@@ -51,12 +52,6 @@ const getAllOrders = function() {
     console.log(error);
   })
 }
-
-getAllProducts();
-
-// userId
-// WHERE users.id = $1
-// [userId]
 
 // Retrieve orders table
 // -- show list of orders for users who already purchased the products, this should appear on their order history page

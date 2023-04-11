@@ -13,10 +13,12 @@ const userQueries = require('../db/queries/users');
 router.get('/', (req, res) => {
   userQueries.getAllProducts()
     .then(products => {
+
       const templateVars = {
         products,
         username: req.session.username
       };
+
       res.render('index', templateVars);
     })
     .catch(err => {
@@ -28,14 +30,28 @@ router.get('/', (req, res) => {
 
 // Orders History route
 router.get('/orders', (req, res) => {
-  userQueries.getAllOrders()
+  const user_id = req.session.userId;
+
+  userQueries.getAllOrders(user_id)
   .then(orders => {
-    res.render('orders', orders);
+
+    // const username = req.session.username;
+
+    if (!user_id) {
+      return res.redirect('/')
+    }
+
+    const templateVars = {
+      orders,
+      username: req.session.username
+    }
+
+    res.render('orders', templateVars);
   })
   .catch(err => {
     res
       .status(500)
-      ,json({ error: err.message });
+      .json({ error: err.message });
   })
 })
 

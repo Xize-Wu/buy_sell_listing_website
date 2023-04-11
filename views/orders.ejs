@@ -1,30 +1,35 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
 
-
+  <%- include('partials/_header') %>
+  
   <h3>Order History</h3>
   <div id="orders-page">
-    <div>
-      Order-id
+    <% for (let order of orders) { %>
       <div>
-        time
+        <div>Order-id: <%= order.id %></div>
         <div>
-          <h4>Summary of Order</h4>
-          <div>Product Names</div>
-          <div>Product Image</div>
+          <div><%= order.purchase_time %></div>
+          <div>
+            <h4>Summary of Order</h4>
+            <div><%= order.title %></div>
+            <img src="<%= order.picture_url %>" alt="Product Image">
+          </div>
         </div>
+        <div><%= order.price %></div>
       </div>
-      cost
-    </div>
-
+      <% } %>
   </div>
 
 
 </body>
+
 </html>
