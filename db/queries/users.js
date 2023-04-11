@@ -9,6 +9,7 @@ const getAllProducts = (options, limit = 10) => {
   ORDER BY posted_time DESC;
   `)
     .then((result) => {
+      console.log( "otherone", result.rows);
       return result.rows;
     })
     .catch((error) => {

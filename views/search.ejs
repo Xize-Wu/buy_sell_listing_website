@@ -1,0 +1,37 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+  <%- include('partials/_header') %>
+
+  <div class="search-container">
+    <h1>Login</h1>
+    <form action="/" method="GET">
+
+      <div class="search-books">
+        <input type="text" name="book" id="search-book-title" placeholder="Please enter the title">
+      </div>
+
+      <div class="search-book-price">
+        <label for="search-form__minimum-price">Minimum Price</label>
+        <input type="number" name="minimum_price" placeholder="Minimum Price" id="search-book-minimum-price">
+        <label for="search-form__maximum-price">Maximum Price</label>
+        <input type="number" name="maximum_price" placeholder="Maximum Price" id="search-book-maximum-price">
+      </div>
+
+      <div class="search-button">
+        <button id="search_books">Search</button>
+        <button id="cancel_search">Cancel</button>
+    </div>
+    </form>
+  </div>
+
+</body>
+
+</html>

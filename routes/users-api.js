@@ -13,6 +13,7 @@ const userQueries = require('../db/queries/users');
 router.get('/', (req, res) => {
   userQueries.getAllProducts()
     .then(products => {
+      console.log("show something", products)
       const templateVars = {
         products,
         username: req.session.username
