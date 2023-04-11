@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+  <title>Favourites</title>
+</head>
+<body>
+
+  <%- include('partials/_header') %>
+
+  <div id="favourites-page">
+
+    <h1 id="favourites-page-title">Saved Books</h1>
+
+    <section id="favourites-summary-container">
+      <% for (let favourite of favourites) { %>
+        <div class="favourite-summary-container-children" id="favourites-book-title"><%= favourite.title %></div>
+        <img class="favourite-summary-container-children" src="<%= favourite.picture_url %>" alt="Product Image">
+
+        <div class="favourite-summary-container-children">
+          <div id="favourite-price">Price: <%= favourite.price %></div>
+          <div id="favourite-condition">Condition: <%= favourite.condition %></div>
+          <div id="favourite-category">Category:<%= favourite.category %></div>
+        </div>
+        <% } %>
+    </section>
+
+  </div>
+
+</body>
+</html>

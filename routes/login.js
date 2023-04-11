@@ -18,12 +18,14 @@ router.post('/', (req, res) => {
       }
 
       const samePassword = bcrypt.compareSync(password, result.password);
+
       if (!samePassword) {
         console.log(`Error: Password doesn't match`);
         res.status(400).send("Error: Password doesn't match");
         return;
       }
       req.session.username = result.name;
+      req.session.userId = result.id;
       res.redirect('/');
     })
     .catch((error) => {

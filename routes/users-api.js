@@ -13,11 +13,12 @@ const userQueries = require('../db/queries/users');
 router.get('/', (req, res) => {
   userQueries.getAllProducts()
     .then(products => {
-      console.log("show something", products)
+
       const templateVars = {
         products,
         username: req.session.username
       };
+
       res.render('index', templateVars);
     })
     .catch(err => {
@@ -25,26 +26,6 @@ router.get('/', (req, res) => {
         .status(500)
         .json({ error: err.message });
     });
-});
-
-// search form
-router.post('/search', (req, res) => {
-
-   userQueries.searchBooksByPrice(req.body)
-  .then ((products) => {
-      const templateVars = {
-        products,
-        username: req.session.username
-      };
-      res.render('product', templateVars);
-    })
-  .catch((error) => {
-    console.log(error);
-  })
-});
-
-router.get('/search', (req, res) => {
-  res.render('search');
 });
 
 module.exports = router;

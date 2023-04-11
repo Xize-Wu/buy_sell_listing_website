@@ -10,8 +10,8 @@
     <div>
       <% if (username) { %>
         <!-- login state -->
-        <a id="navbar-order" href="/order">Order History</a>
-        <a id="navbar-my-list" href="/myLists">My Listings</a>
+        <a id="navbar-order" href="/orders">Order History</a>
+        <a id="navbar-my-list" href="/listings">My Listings</a>
 
         <form method="POST" action="/create">
           <button type="submit">Sell</button>
@@ -21,13 +21,12 @@
           <button type="submit">Message</button>
         </form>
 
-
         <form method="POST" action="/checkout">
           <button type="submit">Shopping Cart</button>
         </form>
 
-        <form method="POST" action="/favourite">
-          <button type="submit">Favourite</button>
+        <form method="GET" action="/favourites">
+          <button type="submit">Favourites</button>
         </form>
 
         <h5>Hello, <%= username %>!</h5>

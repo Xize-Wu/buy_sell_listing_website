@@ -20,6 +20,7 @@ router.post('/', (req, res) => {
       userQueries.storeUserInformation(name, email, bcrypt.hashSync(password, 10))
         .then((result) => {
           req.session.username = result.rows[0].name;
+          req.session.userId = result.rows[0].id;
           res.redirect('/');
         })
         .catch((error) => {
