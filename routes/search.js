@@ -3,7 +3,7 @@ const router = express.Router();
 const userQueries = require('../db/queries/users');
 
 // search form
-router.post('/search', (req, res) => {
+router.post('/', (req, res) => {
 
    userQueries.searchBooksByPrice(req.body)
   .then ((products) => {
@@ -18,8 +18,12 @@ router.post('/search', (req, res) => {
   })
 });
 
-router.get('/search', (req, res) => {
-  res.render('search');
+router.get('/', (req, res) => {
+  const templateVars = {
+    username: req.session.username
+  };
+
+  res.render('search', templateVars);
 });
 
 module.exports = router;
