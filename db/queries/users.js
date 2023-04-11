@@ -72,11 +72,11 @@ const getAllFavourites = function(userId) {
 
 const getAllUSerListings = function(userId) {
   return db.query(`
-  SELECT users.id, title, description, picture_url, price, condition, category, products.created_at as posted_time
+  SELECT products.id, title, description, picture_url, price, condition, category, products.created_at as posted_time
   FROM products
   JOIN users ON user_id = users.id
   WHERE users.id = $1
-  GROUP BY users.id, title, description, picture_url, price, condition, category, posted_time
+  GROUP BY products.id, title, description, picture_url, price, condition, category, posted_time
   ORDER BY posted_time DESC;
   `, [userId])
   .then((result) => {
