@@ -51,8 +51,23 @@ const getAllOrders = function(userId) {
   .catch((error) => {
     console.log(error);
   })
-}
+};
 
+const getAllFavourites = function(userId) {
+  return db.query(`
+  SELECT favourites.id, title, description, products.id, picture_url, price, condition, category
+  FROM favourites
+  JOIN products ON product_id = products.id
+  WHERE favourites.user_id = $1
+  GROUP BY favourites.id, title, description, products.id, picture_url, price, condition, category
+  ORDER BY favourites.created_at;
+  `, [userId])
+  .then((result) => {
+    return result.rows;
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+};
 
-
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders };
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites };
