@@ -1,7 +1,5 @@
 const express = require('express');
-//const userQueries = require('../db/queries/users');
-const { addBookToCart, getCart, checkOut, removeBookFromCart } = require('../db/queries/checkout');
-
+const { addBookToCart, getCart, removeBookFromCart } = require('../db/queries/checkout');
 const router = express.Router();
 
 //Add book to cart
@@ -27,7 +25,7 @@ router.get('/', (req, res) => {
       res.render('checkout', templateVars);
     })
     .catch(error => {
-      console.log(error.message);
+      console.error(error.message);
     })
 });
 
@@ -35,17 +33,11 @@ router.get('/', (req, res) => {
 router.post('/remove', (req, res) => {
   const uid = req.session.userId;
   const pid = req.body.product_id;
-  if (!user_id) {
+  if (!uid) {
     return res.status(400).send("Error: Please log in.");
   }
   removeBookFromCart(uid,pid)
   res.redirect('/cart');
 })
 
-//Check Out
-router.post('/checkout', (req,res) => {
-  const uid = req.session.userId;
-  // checkOut(uid)
-  res.redirect('./orders')
-})
 module.exports = router;

@@ -15,7 +15,7 @@
       <tr>
         <td><%= product.title %></td>
         <td><img src="<%= product.thumbnail %>"></td>
-        <td><%= product.dollar %></td>
+        <td>$ <%= product.dollar %></td>
         <td>
           <form method="post" action="/cart/remove">
             <input name="product_id" value="<%= product.product_id %>" hidden>
@@ -26,8 +26,8 @@
       <% } %>
     </tbody>
   </table>
-  <form>
-    <button type="submit"><input name ="checkout_user_id" value = "???" hidden>Check Out</button>
+  <form method = "post" action="/checkout">
+    <button type="submit"><input name ="checkout_user_id" hidden>Check Out</button>
   </form>
 </main>
 
