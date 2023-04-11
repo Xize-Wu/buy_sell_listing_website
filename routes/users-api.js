@@ -53,6 +53,7 @@ router.get('/orders', (req, res) => {
   })
 });
 
+// Favourites page route
 router.get('/favourites', (req, res) => {
   const user_id = req.session.userId;
 
@@ -76,6 +77,32 @@ router.get('/favourites', (req, res) => {
       .json({ error: err.message });
   })
 });
+
+// User's Listings route
+router.get('/listings', (req, res) => {
+  const user_id = req.session.userId;
+
+  userQueries.getAllUSerListings(user_id)
+  .then(listings => {
+
+    if (!user_id) {
+      return res.redirect('/')
+    }
+
+    const templateVars = {
+      listings,
+      username: req.session.username
+    }
+
+    res.render('listings', templateVars);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  })
+});
+
 
 
 module.exports = router;
