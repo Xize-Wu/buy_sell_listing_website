@@ -32,7 +32,6 @@ router.post('/search', (req, res) => {
 
    userQueries.searchBooksByPrice(req.body)
   .then ((products) => {
-    console.log("show something", products)
       const templateVars = {
         products,
         username: req.session.username

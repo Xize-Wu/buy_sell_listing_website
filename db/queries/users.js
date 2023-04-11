@@ -35,12 +35,12 @@ const storeUserInformation = function (name, email, password) {
     );
 };
 
-const searchBooksByPrice = function (options, limit = 10, price_unit = 'dollars') {
+const searchBooksByPrice = function (options, limit = 10) {
 
   const queryParams = [];
 
   let queryString = `
-  SELECT users.name, title, picture_url, price, condition, category, products.created_at as posted_time
+  SELECT users.name, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
   FROM products
   JOIN users ON user_id = users.id
   WHERE 1=1
@@ -52,25 +52,13 @@ const searchBooksByPrice = function (options, limit = 10, price_unit = 'dollars'
   }
 
   if (options.minimum_price) {
-    let minPrice = options.minimum_price;
-    if (price_unit === 'dollars') {
-      minPrice *= 100;
-    }
-    if (minPrice >= 0 && (options.maximum_price === undefined || minPrice <= options.maximum_price * 100)) {
-      queryParams.push(minPrice);
-      queryString += `AND price >= $${queryParams.length}`;
-    }
+    queryParams.push(options.minimum_price * 100);
+    queryString += `AND price >= $${queryParams.length}`;
   }
 
   if (options.maximum_price) {
-    let maxPrice = options.maximum_price;
-    if (price_unit === 'dollars') {
-      maxPrice *= 100;
-    }
-    if (maxPrice >= 0 && (options.minimum_price === undefined || maxPrice >= options.minimum_price * 100)) {
-      queryParams.push(maxPrice);
-      queryString += ` AND price <= $${queryParams.length}`;
-    }
+    queryParams.push(options.maximum_price * 100);
+    queryString += ` AND price <= $${queryParams.length}`;
   }
 
   queryParams.push(limit);
