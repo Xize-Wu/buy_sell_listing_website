@@ -39,6 +39,9 @@ const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 const logoutRoutes = require('./routes/logout');
+const orderRoutes = require('./routes/orders');
+const favouritesRoutes = require('./routes/favourites');
+const listingsRoutes = require('./routes/listings');
 const searchRoutes = require('./routes/search');
 
 
@@ -51,7 +54,9 @@ app.use('/users', usersRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
-app.use('/orders', userApiRoutes);
+app.use('/orders', orderRoutes);
+app.use('/favourites', favouritesRoutes);
+app.use('/listings', listingsRoutes);
 app.use('/search', searchRoutes);
 // Note: mount other resources here, using the same pattern above
 
