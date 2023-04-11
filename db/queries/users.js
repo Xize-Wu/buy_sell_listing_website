@@ -35,7 +35,7 @@ const storeUserInformation = function (name, email, password) {
     );
 };
 
-const searchBooksByPrice = function (options, limit = 10) {
+const searchBooksByPrice = function (options, limit = 10, price_unit = 'dollars') {
 
   const queryParams = [];
 
@@ -52,13 +52,25 @@ const searchBooksByPrice = function (options, limit = 10) {
   }
 
   if (options.minimum_price) {
-    queryParams.push(options.minimum_price);
-    queryString += `AND price >= $${queryParams.length}`;
+    let minPrice = options.minimum_price;
+    if (price_unit === 'dollars') {
+      minPrice *= 100;
+    }
+    if (minPrice >= 0 && (options.maximum_price === undefined || minPrice <= options.maximum_price * 100)) {
+      queryParams.push(minPrice);
+      queryString += `AND price >= $${queryParams.length}`;
+    }
   }
 
   if (options.maximum_price) {
-    queryParams.push(options.maximum_price);
-    queryString += ` AND price <= $${queryParams.length}`;
+    let maxPrice = options.maximum_price;
+    if (price_unit === 'dollars') {
+      maxPrice *= 100;
+    }
+    if (maxPrice >= 0 && (options.minimum_price === undefined || maxPrice >= options.minimum_price * 100)) {
+      queryParams.push(maxPrice);
+      queryString += ` AND price <= $${queryParams.length}`;
+    }
   }
 
   queryParams.push(limit);
@@ -78,5 +90,6 @@ const searchBooksByPrice = function (options, limit = 10) {
     .catch((error) =>
       console.log(error.message));
 };
+
 
 module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, searchBooksByPrice };
