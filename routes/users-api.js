@@ -32,13 +32,16 @@ router.post('/search', (req, res) => {
 
   const { book_title, minimum_price, maximum_price } = req.body;
 
-  userQueries.searchBooksByPrice(book_title, minimum_price, maximum_price)
+  // userQueries.searchBooksByPrice(book_title, minimum_price, maximum_price)
+  userQueries.searchBooksByPrice(req.body)
   .then ((result) => {
-    console.log(result);
+
   })
   .catch((error) => {
     console.log(error);
   })
+
+
 
   // userQueries.searchBookByPrice(title, minimum_price, maximum_price)
   // .then((result) => {
