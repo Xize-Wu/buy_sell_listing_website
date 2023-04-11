@@ -40,16 +40,6 @@ router.post('/search', (req, res) => {
   .catch((error) => {
     console.log(error);
   })
-
-
-
-  // userQueries.searchBookByPrice(title, minimum_price, maximum_price)
-  // .then((result) => {
-  //   res.redirect('/');
-  // })
-  // .catch((error) => {
-  //   console.log(error);
-  // })
 });
 
 router.get('/search', (req, res) => {

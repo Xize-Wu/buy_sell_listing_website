@@ -52,12 +52,12 @@ const searchBooksByPrice = function (options, limit = 10) {
 
   if (options.minimum_price) {
     queryParams.push(options.minimum_price);
-    queryString += ` AND price >= $${queryParams.length}`;
+    queryString += `AND price >= $${queryParams.length}`;
   }
 
   if (options.maximum_price) {
     queryParams.push(options.minimum_price);
-    queryString += ` AND price <= $${queryParams.length}`;
+    queryString += `AND price <= $${queryParams.length}`;
   }
 
   queryParams.push(limit);
@@ -71,12 +71,11 @@ const searchBooksByPrice = function (options, limit = 10) {
 
   return db.query(queryString, queryParams)
     .then((result) => {
-      console.log(result);
-      console.log(`ROWS ONLY THIS IS ROWS ONLY I AM PRINTING ROWS: `, result.rows)
-      return result;
+      console.log(result.rows);
+      return result.rows;
     })
     .catch((error) =>
-      console.log(error));
+      console.log(error.message));
 };
 
 module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, searchBooksByPrice };
