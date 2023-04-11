@@ -35,8 +35,6 @@ router.get('/orders', (req, res) => {
   userQueries.getAllOrders(user_id)
   .then(orders => {
 
-    // const username = req.session.username;
-
     if (!user_id) {
       return res.redirect('/')
     }

@@ -35,7 +35,6 @@ router.post('/', (req, res) => {
 // Display the register page
 router.get('/', (req, res) => {
   const user_name = req.session.username;
-  const user_id = req.session.userId
 
   if (user_name) {
     return res.render('/');

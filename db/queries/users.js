@@ -53,4 +53,6 @@ const getAllOrders = function(userId) {
   })
 }
 
+
+
 module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders };
