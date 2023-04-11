@@ -87,4 +87,48 @@ const getAllUSerListings = function(userId) {
   })
 }
 
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings };
+const searchBooksByPrice = function (options, limit = 10) {
+
+  const queryParams = [];
+
+  let queryString = `
+  SELECT users.name, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
+  FROM products
+  JOIN users ON user_id = users.id
+  WHERE 1=1
+  `;
+
+  if (options.book_title) {
+    queryParams.push(`%${options.book_title}%`);
+    queryString += `AND title LIKE $${queryParams.length}`;
+  }
+
+  if (options.minimum_price) {
+    queryParams.push(options.minimum_price * 100);
+    queryString += `AND price >= $${queryParams.length}`;
+  }
+
+  if (options.maximum_price) {
+    queryParams.push(options.maximum_price * 100);
+    queryString += ` AND price <= $${queryParams.length}`;
+  }
+
+  queryParams.push(limit);
+  queryString += `
+  GROUP BY users.name, title, picture_url, price, condition, category, posted_time
+  ORDER BY posted_time DESC
+  LIMIT $${queryParams.length};
+  `;
+
+  console.log(queryString, queryParams, options);
+
+  return db.query(queryString, queryParams)
+    .then((result) => {
+      console.log(result.rows);
+      return result.rows;
+    })
+    .catch((error) =>
+      console.log(error.message));
+};
+
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice };
