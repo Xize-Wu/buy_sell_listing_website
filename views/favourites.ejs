@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favourites</title>
+</head>
+<body>
+  
+  <%- include('partials/_header') %>
+
+  <div id="favourites-page">
+
+    <h1 id="favourites-page-title">Saved Books</h1>
+
+    <section id="favourites-summary-container">
+      <% for (let favourite of favourites) { %>
+        <div id="favourites-book-title"><%= favourite.title %></div>
+        <img src="<%= favourite.picture_url %>" alt="Product Image">
+        <% } %>
+    </section>
+
+  </div>
+
+</body>
+</html>
