@@ -51,16 +51,40 @@ const getAllOrders = function(userId) {
   .catch((error) => {
     console.log(error);
   })
+};
+
+const getAllFavourites = function(userId) {
+  return db.query(`
+  SELECT favourites.id, title, description, products.id, picture_url, price, condition, category
+  FROM favourites
+  JOIN products ON product_id = products.id
+  WHERE favourites.user_id = $1
+  GROUP BY favourites.id, title, description, products.id, picture_url, price, condition, category
+  ORDER BY favourites.created_at;
+  `, [userId])
+  .then((result) => {
+    return result.rows;
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+};
+
+const getAllUSerListings = function(userId) {
+  return db.query(`
+  SELECT products.id, title, description, picture_url, price, condition, category, products.created_at as posted_time
+  FROM products
+  JOIN users ON user_id = users.id
+  WHERE users.id = $1
+  GROUP BY products.id, title, description, picture_url, price, condition, category, posted_time
+  ORDER BY posted_time DESC;
+  `, [userId])
+  .then((result) => {
+    return result.rows;
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 }
 
-// Retrieve orders table
-// -- show list of orders for users who already purchased the products, this should appear on their order history page
-
-// SELECT orders products.title, products.price, purchase_time
-// FROM orders
-// JOIN users ON user_id = users.id
-// JOIN products ON product_id = products.id
-// GROUP BY users.name, products.title, products.price, purchase_time
-// ORDER BY purchase_time DESC;
-
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders };
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings };

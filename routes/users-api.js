@@ -35,7 +35,6 @@ router.get('/orders', (req, res) => {
   userQueries.getAllOrders(user_id)
   .then(orders => {
 
-    //
     if (!user_id) {
       return res.redirect('/')
     }
@@ -52,6 +51,58 @@ router.get('/orders', (req, res) => {
       .status(500)
       .json({ error: err.message });
   })
-})
+});
+
+// Favourites page route
+router.get('/favourites', (req, res) => {
+  const user_id = req.session.userId;
+
+  userQueries.getAllFavourites(user_id)
+  .then(favourites => {
+
+    if (!user_id) {
+      return res.redirect('/')
+    }
+
+    const templateVars = {
+      favourites,
+      username: req.session.username
+    }
+
+    res.render('favourites', templateVars);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  })
+});
+
+// User's Listings route
+router.get('/listings', (req, res) => {
+  const user_id = req.session.userId;
+
+  userQueries.getAllUSerListings(user_id)
+  .then(listings => {
+
+    if (!user_id) {
+      return res.redirect('/')
+    }
+
+    const templateVars = {
+      listings,
+      username: req.session.username
+    }
+
+    res.render('listings', templateVars);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  })
+});
+
+
 
 module.exports = router;
