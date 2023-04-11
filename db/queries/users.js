@@ -39,14 +39,13 @@ const getAllOrders = function() {
   return db.query(`
   SELECT orders.id, orders.purchase_time, products.title, products.picture_url, products.price
   FROM orders
-  JOIN products ON product_id = products.id
-  JOIN users ON user_id = users.id
+  JOIN products ON orders.product_id = products.id
+  JOIN users ON orders.user_id = users.id
   GROUP BY orders.id, orders.purchase_time, products.title, products.picture_url, products.price
   ORDER BY purchase_time DESC;
   `)
   .then((result) => {
-    console.log(result);
-    return result;
+    return result.rows;
   })
   .catch((error) => {
     console.log(error);

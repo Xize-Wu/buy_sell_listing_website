@@ -28,8 +28,15 @@ router.get('/', (req, res) => {
 
 // Orders History route
 router.get('/orders', (req, res) => {
-
-  res.render('orders');
+  userQueries.getAllOrders()
+  .then(orders => {
+    res.render('orders', orders);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      ,json({ error: err.message });
+  })
 })
 
 module.exports = router;
