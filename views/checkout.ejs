@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Name of the website - Check Out</title>
+
+<!-- CSS (load bootstrap from a CDN) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<main>
+  <table>
+    <tbody>
+      <% for (let product of data) { %>
+      <tr>
+        <td><%= product.title %></td>
+        <td><img src="<%= product.thumbnail %>"></td>
+        <td>$ <%= product.dollar %></td>
+        <td>
+          <form method="post" action="/cart/remove">
+            <input name="product_id" value="<%= product.product_id %>" hidden>
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <form method = "post" action="/checkout">
+    <button type="submit"><input name ="checkout_user_id" hidden>Check Out</button>
+  </form>
+</main>
+
+</body>
+<footer>
+  <!-- Footer missing -->
+</footer>
+
+</body>
+</html>
+
+
+
+
+

@@ -39,6 +39,9 @@ const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 const logoutRoutes = require('./routes/logout');
+const showRoutes = require('./routes/show');
+const cartRoutes = require('./routes/cart')
+const checkoutRoutes = require('./routes/checkout')
 const orderRoutes = require('./routes/orders');
 const favouritesRoutes = require('./routes/favourites');
 const listingsRoutes = require('./routes/listings');
@@ -54,6 +57,9 @@ app.use('/users', usersRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
+app.use('/show', showRoutes);
+app.use('/cart', cartRoutes);
+app.use('/checkout',checkoutRoutes)
 app.use('/orders', orderRoutes);
 app.use('/favourites', favouritesRoutes);
 app.use('/listings', listingsRoutes);
