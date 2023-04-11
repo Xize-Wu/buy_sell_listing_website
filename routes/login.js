@@ -24,6 +24,7 @@ router.post('/', (req, res) => {
         return;
       }
       req.session.username = result.name;
+      req.session.userId = result.id;
       res.redirect('/');
     })
     .catch((error) => {
