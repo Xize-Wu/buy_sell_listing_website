@@ -1,18 +1,19 @@
 const db = require('../connection');
 
-const getAllProducts = (options, limit = 10) => {
+const getAllProducts = (limit = 10) => {
   return db.query(`
   SELECT users.name, title, picture_url, price, condition, category, products.created_at as posted_time
   FROM products
   JOIN users ON user_id = users.id
   GROUP BY users.name, title, picture_url, price, condition, category, posted_time
-  ORDER BY posted_time DESC;
-  `)
+  ORDER BY posted_time DESC
+  LIMIT $1;
+  `, [limit])
     .then((result) => {
       return result.rows;
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error.message);
     });
 };
 
@@ -30,9 +31,8 @@ const storeUserInformation = function(name, email, password) {
   return db
     .query(`
   INSERT INTO users (name, email, password)
-  VALUES ($1, $2, $3) RETURNING *`,
-      [name, email, password]
-    );
+  VALUES ($1, $2, $3) RETURNING *`
+    ,[name, email, password]);
 };
 
 const getAllOrders = function(userId) {
@@ -45,12 +45,12 @@ const getAllOrders = function(userId) {
   GROUP BY orders.id, orders.purchase_time, products.title, products.picture_url, products.price
   ORDER BY purchase_time DESC;
   `, [userId])
-  .then((result) => {
-    return result.rows;
-  })
-  .catch((error) => {
-    console.log(error);
-  })
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
 };
 
 const getAllFavourites = function(userId) {
@@ -62,12 +62,12 @@ const getAllFavourites = function(userId) {
   GROUP BY favourites.id, title, description, products.id, picture_url, price, condition, category
   ORDER BY favourites.created_at;
   `, [userId])
-  .then((result) => {
-    return result.rows;
-  })
-  .catch((error) => {
-    console.log(error);
-  })
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
 };
 
 const getAllUSerListings = function(userId) {
@@ -79,15 +79,15 @@ const getAllUSerListings = function(userId) {
   GROUP BY products.id, title, description, picture_url, price, condition, category, posted_time
   ORDER BY posted_time DESC;
   `, [userId])
-  .then((result) => {
-    return result.rows;
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-}
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
+};
 
-const searchBooksByPrice = function (options, limit = 10) {
+const searchBooksByPrice = function(options, limit = 10) {
 
   const queryParams = [];
 
@@ -120,15 +120,13 @@ const searchBooksByPrice = function (options, limit = 10) {
   LIMIT $${queryParams.length};
   `;
 
-  console.log(queryString, queryParams, options);
-
   return db.query(queryString, queryParams)
     .then((result) => {
-      console.log(result.rows);
       return result.rows;
     })
-    .catch((error) =>
-      console.log(error.message));
+    .catch((error) => {
+      console.error(error.message);
+    });
 };
 
 module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice };
