@@ -2,10 +2,10 @@ const db = require('../connection');
 
 const getAllProducts = (limit = 10) => {
   return db.query(`
-  SELECT users.name, title, picture_url, price, condition, category, products.created_at as posted_time
+  SELECT users.name, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
   FROM products
   JOIN users ON user_id = users.id
-  GROUP BY users.name, title, picture_url, price, condition, category, posted_time
+  GROUP BY users.name, title, picture_url, dollar, condition, category, posted_time
   ORDER BY posted_time DESC
   LIMIT $1;
   `, [limit])
@@ -37,12 +37,12 @@ const storeUserInformation = function(name, email, password) {
 
 const getAllOrders = function(userId) {
   return db.query(`
-  SELECT orders.id, orders.purchase_time, products.title, products.picture_url, products.price
+  SELECT orders.id, orders.purchase_time, products.title, products.picture_url, (products.price/100) AS dollar
   FROM orders
   JOIN products ON orders.product_id = products.id
   JOIN users ON orders.user_id = users.id
   WHERE users.id = $1
-  GROUP BY orders.id, orders.purchase_time, products.title, products.picture_url, products.price
+  GROUP BY orders.id, orders.purchase_time, products.title, products.picture_url, dollar
   ORDER BY purchase_time DESC;
   `, [userId])
     .then((result) => {
@@ -55,11 +55,11 @@ const getAllOrders = function(userId) {
 
 const getAllFavourites = function(userId) {
   return db.query(`
-  SELECT favourites.id, title, description, products.id, picture_url, price, condition, category
+  SELECT favourites.id, title, description, products.id, picture_url, (price/100) AS dollar, condition, category
   FROM favourites
   JOIN products ON product_id = products.id
   WHERE favourites.user_id = $1
-  GROUP BY favourites.id, title, description, products.id, picture_url, price, condition, category
+  GROUP BY favourites.id, title, description, products.id, picture_url, dollar, condition, category
   ORDER BY favourites.created_at;
   `, [userId])
     .then((result) => {
@@ -72,11 +72,11 @@ const getAllFavourites = function(userId) {
 
 const getAllUSerListings = function(userId) {
   return db.query(`
-  SELECT products.id, title, description, picture_url, price, condition, category, products.created_at as posted_time
+  SELECT products.id, title, description, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
   FROM products
   JOIN users ON user_id = users.id
   WHERE users.id = $1
-  GROUP BY products.id, title, description, picture_url, price, condition, category, posted_time
+  GROUP BY products.id, title, description, picture_url, dollar, condition, category, posted_time
   ORDER BY posted_time DESC;
   `, [userId])
     .then((result) => {
@@ -115,7 +115,7 @@ const searchBooksByPrice = function(options, limit = 10) {
 
   queryParams.push(limit);
   queryString += `
-  GROUP BY users.name, title, picture_url, price, condition, category, posted_time
+  GROUP BY users.name, title, picture_url, dollar, condition, category, posted_time
   ORDER BY posted_time DESC
   LIMIT $${queryParams.length};
   `;
