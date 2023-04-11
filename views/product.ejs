@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Search Results</title>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+</head>
+
+<body>
+  <%- include('partials/_header') %>
+
+  <main id="main-content">
+
+    <div>
+      <h1>Search Results</h1>
+    </div>
+    <% if (products.length === 0) { %>
+      <div>No products found.</div>
+    <% } else { %>
+      <% for (let product of products) { %>
+        <div>
+          <div>
+            <h4><%= product.name %></h4>
+            <div><%= product.posted_time %></div>
+          </div>
+          <img src="<%= product.picture_url %>" alt="Product Image">
+          <h3><%= product.title %></h3>
+          <div>
+            <div>Price: <%= product.price %></div>
+            <div>Condition: <%= product.condition %></div>
+            <div>Category: <%= product.category %></div>
+          </div>
+        </div>
+      <% } %>
+    <% } %>
+
+  </main>
+
+</body>
+
+</html>
