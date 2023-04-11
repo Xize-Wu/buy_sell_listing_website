@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+</head>
+
+<body>
+
+  <%- include('partials/_header') %>
+
+  <div class="search-container">
+    <h1>Search</h1>
+    <form action="/search" method="POST">
+      <div class="search-books-form">
+        <label for="search-books">Book Name</label>
+        <input type="text" name="book_title" id="search-book-title" placeholder="Please enter the book name">
+      </div>
+
+      <div class="search-book-form">
+        <label for="search-form__minimum-price">Minimum Price</label>
+        <input type="number" name="minimum_price" placeholder="Minimum Price" id="search-book-form_minimum-price">
+        <label for="search-form__maximum-price">Maximum Price</label>
+        <input type="number" name="maximum_price" placeholder="Maximum Price" id="search-book-form_maximum-price">
+      </div>
+
+      <div class="search-book-form">
+        <button id="search_books">Search</button>
+        <button id="cancel_search">Cancel</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

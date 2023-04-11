@@ -42,6 +42,10 @@ const logoutRoutes = require('./routes/logout');
 const showRoutes = require('./routes/show');
 const cartRoutes = require('./routes/cart')
 const checkoutRoutes = require('./routes/checkout')
+const orderRoutes = require('./routes/orders');
+const favouritesRoutes = require('./routes/favourites');
+const listingsRoutes = require('./routes/listings');
+const searchRoutes = require('./routes/search');
 
 
 // Mount all resource routes
@@ -53,10 +57,13 @@ app.use('/users', usersRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
-app.use('/orders', userApiRoutes);
 app.use('/show', showRoutes);
 app.use('/cart', cartRoutes);
 app.use('/checkout',checkoutRoutes)
+app.use('/orders', orderRoutes);
+app.use('/favourites', favouritesRoutes);
+app.use('/listings', listingsRoutes);
+app.use('/search', searchRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
