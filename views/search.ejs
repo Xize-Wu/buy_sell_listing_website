@@ -8,30 +8,28 @@
 </head>
 
 <body>
-  <%- include('partials/_header') %>
 
   <div class="search-container">
-    <h1>Login</h1>
-    <form action="/" method="GET">
-
-      <div class="search-books">
-        <input type="text" name="book" id="search-book-title" placeholder="Please enter the title">
+    <h1>Search</h1>
+    <form action="/search" method="POST">
+      <div class="search-books-form">
+        <label for="search-books">Book Name</label>
+        <input type="text" name="book_title" id="search-book-title" placeholder="Please enter the book name">
       </div>
 
-      <div class="search-book-price">
+      <div class="search-book-form">
         <label for="search-form__minimum-price">Minimum Price</label>
-        <input type="number" name="minimum_price" placeholder="Minimum Price" id="search-book-minimum-price">
+        <input type="number" name="minimum_price" placeholder="Minimum Price" id="search-book-form_minimum-price">
         <label for="search-form__maximum-price">Maximum Price</label>
-        <input type="number" name="maximum_price" placeholder="Maximum Price" id="search-book-maximum-price">
+        <input type="number" name="maximum_price" placeholder="Maximum Price" id="search-book-form_maximum-price">
       </div>
 
-      <div class="search-button">
+      <div class="search-book-form">
         <button id="search_books">Search</button>
         <button id="cancel_search">Cancel</button>
-    </div>
+      </div>
     </form>
   </div>
-
 </body>
 
 </html>
