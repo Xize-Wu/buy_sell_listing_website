@@ -2,7 +2,7 @@ const db = require('../connection');
 
 const getAllProducts = (limit = 10) => {
   return db.query(`
-  SELECT users.name, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
+  SELECT users.name, products.id, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
   FROM products
   JOIN users ON user_id = users.id
   ORDER BY posted_time DESC

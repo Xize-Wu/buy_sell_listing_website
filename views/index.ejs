@@ -27,19 +27,21 @@
       </div>
       <% for (let product of products) { %>
         <section class="home-page-container">
+
           <div class="home-page-container-children">
             <h4 id="home-page-username"><%= product.name %></h4>
             <div id="home-page-time"><%= product.posted_time %></div>
           </div>
 
           <img id="home-page-picture" class="home-page-container-children" src="<%= %>" alt="Product Image">
-          <h3 id="home-page-book-name" class="home-page-container-children"><%= product.title %></h3>
+          <a id="home-page-book-name" class="home-page-container-children" href="/show/<%= product.id %>"><%= product.title %></a>
 
           <div class="home-page-container-children">
             <div id="home-page-price">$ <%= product.dollar %></div>
             <div id="home-page-condition">Condition: <%= product.condition %></div>
             <div id="home-page-category">Category:<%= product.category %></div>
           </div>
+
         </section>
         <% } %>
 
