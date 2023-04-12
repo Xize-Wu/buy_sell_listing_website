@@ -34,6 +34,11 @@
         </form>
       </div>
 
+      <form action="/mark_sold" method="POST">
+        <input name="product_id" value="<%= id %>" hidden>
+        <button type="submit">Sold</button>
+      </form>
+
     </section>
     <section class="description">
     <div id="description">
