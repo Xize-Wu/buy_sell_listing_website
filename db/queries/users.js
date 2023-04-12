@@ -5,6 +5,7 @@ const getAllProducts = (limit = 10) => {
   SELECT users.name, products.id, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
   FROM products
   JOIN users ON user_id = users.id
+  JOIN favourites ON favourites.product_id = products.id AND user_id = favourites.user_id
   ORDER BY posted_time DESC
   LIMIT $1;
   `, [limit])
@@ -124,4 +125,21 @@ const searchBooksByPrice = function(options, limit = 10) {
     });
 };
 
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice };
+const addProductToFavourites = function(userId, productId) {
+  console.log('THIS IS MY USERID ', userId);
+  console.log('THIS IS MY PRODUCTID ',productId);
+
+  return db.query(`
+  INSERT INTO favourites (user_id, product_id)
+  VALUES ($1, $2)
+  RETURNING *
+  `, [userId, productId])
+}
+
+
+// SELECT products.id, title, thumbnail_url, price, condition, category, products.created_at as posted_time
+// FROM products
+// JOIN favourites ON favourites.product_id = products.id
+// WHERE favourites.user_id = $1 AND products.id = $2
+
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice, addProductToFavourites };
