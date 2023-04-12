@@ -1,0 +1,61 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2em;
+}
+
+h4 {
+  margin-bottom: 0;
+}
+
+.post {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.post img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.post h3 {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+.post .details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.post .details div {
+  flex-basis: 33%;
+}
+
+.post .details .price {
+  text-align: left;
+}
+
+.post .details .condition {
+  text-align: center;
+}
+
+.post .details .category {
+  text-align: right;
+}

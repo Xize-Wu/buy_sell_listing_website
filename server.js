@@ -39,6 +39,7 @@ const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 const logoutRoutes = require('./routes/logout');
+const newlistingRoutes = require('./routes/my_listing_form');
 
 
 // Mount all resource routes
@@ -51,6 +52,7 @@ app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
 app.use('/search',userApiRoutes);
+app.use('/my_listing_form', newlistingRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page

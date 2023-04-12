@@ -79,5 +79,31 @@ const searchBooksByPrice = function (options, limit = 10) {
       console.log(error.message));
 };
 
+const addListing = function (products) {
+  const queryString = `
+    INSERT INTO products (title, description, picture_url, price, condition, category) 
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING *;`;
 
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, searchBooksByPrice };
+  const values = [
+
+    products.title,
+    products.description,
+    products.picture_url,
+    products.price,
+    products.condition,
+    products.category,
+   
+  ];
+
+  return pool
+    .query(queryString, values)
+    .then((res) => {
+      return res.rows[0];
+    })
+    .catch((err) => {
+      return console.log("query error:", err);
+    });
+};
+
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, searchBooksByPrice, addListing };
