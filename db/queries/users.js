@@ -2,14 +2,14 @@ const db = require('../connection');
 
 const getAllProducts = (limit = 10) => {
   return db.query(`
-  SELECT users.name, products.id, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
+  SELECT DISTINCT sellers.name, products.id, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
   FROM products
-  JOIN users ON user_id = users.id
-  JOIN favourites ON favourites.product_id = products.id AND user_id = favourites.user_id
+  JOIN users AS sellers ON user_id = sellers.id
   ORDER BY posted_time DESC
   LIMIT $1;
   `, [limit])
     .then((result) => {
+      console.log('GET ALL PRODUCTS RESULT: ', result.rows);
       return result.rows;
     })
     .catch((error) => {
@@ -54,7 +54,7 @@ const getAllOrders = function(userId) {
 
 const getAllFavourites = function(userId) {
   return db.query(`
-  SELECT favourites.id, title, description, products.id, picture_url, (price/100) AS dollar, condition, category
+  SELECT favourites.id, title, description, products.id AS product_id, picture_url, (price/100) AS dollar, condition, category
   FROM favourites
   JOIN products ON product_id = products.id
   WHERE favourites.user_id = $1
@@ -126,20 +126,21 @@ const searchBooksByPrice = function(options, limit = 10) {
 };
 
 const addProductToFavourites = function(userId, productId) {
-  console.log('THIS IS MY USERID ', userId);
-  console.log('THIS IS MY PRODUCTID ',productId);
-
   return db.query(`
   INSERT INTO favourites (user_id, product_id)
   VALUES ($1, $2)
   RETURNING *
   `, [userId, productId])
-}
+};
+
+const removeProductFromFavourites = function(userId, productId) {
+  console.log('INSIDE REMOVEPRODUCT FUNCTION, USERID', userId, 'PRODUCT ID: ', productId);
+
+  return db.query(`DELETE FROM favourites
+  WHERE user_id = $1
+  AND product_id = $2
+  `, [userId, productId])
+};
 
 
-// SELECT products.id, title, thumbnail_url, price, condition, category, products.created_at as posted_time
-// FROM products
-// JOIN favourites ON favourites.product_id = products.id
-// WHERE favourites.user_id = $1 AND products.id = $2
-
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice, addProductToFavourites };
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice, addProductToFavourites, removeProductFromFavourites };
