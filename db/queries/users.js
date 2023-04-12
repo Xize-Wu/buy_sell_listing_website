@@ -5,7 +5,6 @@ const getAllProducts = (limit = 10) => {
   SELECT users.name, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
   FROM products
   JOIN users ON user_id = users.id
-  GROUP BY users.name, title, picture_url, dollar, condition, category, posted_time
   ORDER BY posted_time DESC
   LIMIT $1;
   `, [limit])
@@ -42,7 +41,6 @@ const getAllOrders = function(userId) {
   JOIN products ON orders.product_id = products.id
   JOIN users ON orders.user_id = users.id
   WHERE users.id = $1 AND orders.purchased = TRUE AND orders.removed = FALSE
-  GROUP BY orders.id, orders.purchase_time, products.title, products.thumbnail_url, dollar
   ORDER BY purchase_time DESC;
   `, [userId])
     .then((result) => {
@@ -59,7 +57,6 @@ const getAllFavourites = function(userId) {
   FROM favourites
   JOIN products ON product_id = products.id
   WHERE favourites.user_id = $1
-  GROUP BY favourites.id, title, description, products.id, picture_url, dollar, condition, category
   ORDER BY favourites.created_at;
   `, [userId])
     .then((result) => {
@@ -76,7 +73,6 @@ const getAllUSerListings = function(userId) {
   FROM products
   JOIN users ON user_id = users.id
   WHERE users.id = $1
-  GROUP BY products.id, title, description, picture_url, dollar, condition, category, posted_time
   ORDER BY posted_time DESC;
   `, [userId])
     .then((result) => {
@@ -115,7 +111,6 @@ const searchBooksByPrice = function(options, limit = 10) {
 
   queryParams.push(limit);
   queryString += `
-  GROUP BY users.name, title, picture_url, dollar, condition, category, posted_time
   ORDER BY posted_time DESC
   LIMIT $${queryParams.length};
   `;
