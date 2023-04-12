@@ -25,12 +25,14 @@
       <div id ="item-title"><%= title %></div>
       <div id ="item-price"><%= price %> </div>
       <div id ="seller"><%= seller %></div>
-      <div class = "button" id ="message-button"><button type="submit">Message Me</button></div>
+      <form method="post" action = "/message">
+      <div class = "button" id ="message-button"><button type="submit" class ="button" id="purchase-button">Message Me</button></div>
+     </form>
 
       <div class ="button" id="purchase-button">
         <form method="post" action = "/cart">
           <input name="product_id" value="<%= id %>" hidden>
-          <button type="submit">Buy Now</button>
+          <button type="submit" class ="button" id="purchase-button">Buy Now</button>
         </form>
       </div>
 
