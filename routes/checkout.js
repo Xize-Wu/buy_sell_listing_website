@@ -13,6 +13,11 @@ router.post('/', (req, res) => {
   .then((response) =>{
     console.log('response', response)
     res.redirect('/orders')
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
   });
 });
 
