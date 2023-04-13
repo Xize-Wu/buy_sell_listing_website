@@ -143,11 +143,12 @@ const removeProductFromFavourites = function(userId, productId) {
 const addListing = function (products, userId) {
   const queryString = `
     INSERT INTO products (user_id, title, description, picture_url, price, condition, category)
-    VALUES ($1, $2, $3, $4, $5, $6)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *;`;
 
   const values = [
 
+    userId,
     products.title,
     products.description,
     products.picture_url,
@@ -157,7 +158,7 @@ const addListing = function (products, userId) {
 
   ];
 
-  return pool
+  return db
     .query(queryString, values)
     .then((result) => {
       return result.rows[0];
