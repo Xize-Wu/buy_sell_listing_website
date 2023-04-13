@@ -1,27 +1,29 @@
 const db = require('../connection');
 
+
+// works in the terminal
 const getAdminUserIdWithProduct = function(productId) {
   return db.query(`SELECT user_id FROM products WHERE id = $1`, [productId])
   .then((result) => {
-    console.log('THIS IS THE USERID WE WANT!!!:', result);
-    return result;
+
+    // console.log('THIS IS THE USERID WE WANT!!!:', result.rows[0]);
+    return result.rows[0];
   })
   .catch((error) => {
     console.error(error.message);
   })
-}
+};
 
+// Need to test this!!
 const markSold = function(productId) {
   return db.query(`
-  UPDATE products SET available = FALSE
-  FROM products
-  JOIN users ON users.id = products.user_id
+  UPDATE products
+  SET available = FALSE
   WHERE id = $1
+  RETURNING *
   `, [productId])
   .then((result) => {
-    console.log(result)
-    console.log('THIS IS THE ROWS', result.rows)
-    return result;
+    return result.rows[0];
   })
   .catch((error) => {
     console.error(error.message)
