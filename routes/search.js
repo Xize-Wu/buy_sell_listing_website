@@ -5,7 +5,7 @@ const userQueries = require('../db/queries/users');
 // search form
 router.post('/', (req, res) => {
 
-   userQueries.searchBooksByPrice(req.body)
+  userQueries.searchBooksByPrice(req.body)
   .then ((products) => {
       const templateVars = {
         products,
