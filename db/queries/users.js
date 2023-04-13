@@ -140,4 +140,32 @@ const removeProductFromFavourites = function(userId, productId) {
 };
 
 
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice, addProductToFavourites, removeProductFromFavourites };
+const addListing = function (products, userId) {
+  const queryString = `
+    INSERT INTO products (user_id, title, description, picture_url, price, condition, category)
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING *;`;
+
+  const values = [
+
+    products.title,
+    products.description,
+    products.picture_url,
+    products.price,
+    products.condition,
+    products.category,
+
+  ];
+
+  return pool
+    .query(queryString, values)
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
+};
+
+
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice, addProductToFavourites, removeProductFromFavourites, addListing };
