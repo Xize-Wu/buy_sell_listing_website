@@ -79,30 +79,31 @@ const searchBooksByPrice = function (options, limit = 10) {
       console.log(error.message));
 };
 
-const addListing = function (products) {
+const addListing = function (userId, products) {
   const queryString = `
-    INSERT INTO products (title, description, picture_url, price, condition, category) 
-    VALUES ($1, $2, $3, $4, $5, $6)
+    INSERT INTO products (user_id, title, description, picture_url, price, condition, category)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *;`;
 
   const values = [
 
+    userId,
     products.title,
     products.description,
     products.picture_url,
     products.price,
     products.condition,
     products.category,
-   
+
   ];
 
-  return pool
+  return db
     .query(queryString, values)
-    .then((res) => {
-      return res.rows[0];
+    .then((result) => {
+      return result.rows[0];
     })
-    .catch((err) => {
-      return console.log("query error:", err);
+    .catch((error) => {
+      console.error(error.message);
     });
 };
 
