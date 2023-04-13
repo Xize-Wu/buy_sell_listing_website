@@ -9,7 +9,6 @@ const getAllProducts = (limit = 10) => {
   LIMIT $1;
   `, [limit])
     .then((result) => {
-      console.log('GET ALL PRODUCTS RESULT: ', result.rows);
       return result.rows;
     })
     .catch((error) => {
@@ -134,8 +133,6 @@ const addProductToFavourites = function(userId, productId) {
 };
 
 const removeProductFromFavourites = function(userId, productId) {
-  console.log('INSIDE REMOVEPRODUCT FUNCTION, USERID', userId, 'PRODUCT ID: ', productId);
-
   return db.query(`DELETE FROM favourites
   WHERE user_id = $1
   AND product_id = $2
