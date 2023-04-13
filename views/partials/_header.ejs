@@ -1,34 +1,52 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./styles/nav_bar.css" />
+
+</head>
+
+
 <header>
   <nav id="navbar" class="navbar">
-    <div>
+    <div class="parent-nav">
       <a class="navbar-brand" href="/">Brand Name</a>
-      <a class="navbar-home" href="/">🏠</a>
+      <a class="navbar-home" href="/">
+        <i class="fa-solid fa-house-user"></i>
+      </a>
       <a class="navbar-search" href="/search">Search</a>
 
-    </div>
 
-    <div>
       <% if (username) { %>
         <!-- login state -->
+
         <a id="navbar-order" href="/orders">Order History</a>
         <a id="navbar-my-list" href="/listings">My Listings</a>
         <a id="navbar-my-list" href="/my_listing_form/myLists">Create Listing</a>
-
-        <form method="POST" action="/create">
-          <button type="submit">Sell</button>
-        </form>
 
         <form method="POST" action="/message">
           <button type="submit">Message</button>
         </form>
 
-        <form method="POST" action="/cart">
-          <button type="submit">Shopping Cart</button>
-        </form>
+        <a class="navbar-message" href="/message">
+          <i class="fa-solid fa-message-lines"></i>
+        </a>
+
+        <a class="navbar-cart" href="/cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+        </a>
 
         <form method="GET" action="/favourites">
           <button type="submit">Favourites</button>
         </form>
+
+        <a class="navbar-cart" href="/favourites">
+          <i class="fa-duotone fa-book-heart" style="--fa-primary-color: #966c31; --fa-secondary-color: #c1925c;"></i>
+        </a>
+
 
         <h5>Hello, <%= username %>!</h5>
 
@@ -46,6 +64,11 @@
             <% } %>
           </div>
 
+
   </nav>
 </header>
 
+
+
+
+</html>
