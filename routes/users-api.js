@@ -36,6 +36,12 @@ router.get('/', (req, res) => {
 
         res.render('index', templateVars);
       })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      })
+
     })
     .catch(err => {
       res

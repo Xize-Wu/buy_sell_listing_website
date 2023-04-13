@@ -25,7 +25,8 @@ const checkOut = function(uid) {
 
 //Is uid necessary?
 const removeBookFromCart = function(uid, pid) {
-  return db.query('UPDATE orders SET removed = TRUE WHERE user_id =$1 AND product_id=$2', [uid, pid]);
+  return db.query('UPDATE orders SET removed = TRUE WHERE user_id =$1 AND product_id=$2', [uid, pid])
+  .catch(error => console.error(error.message));
 };
 
 
