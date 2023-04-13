@@ -35,10 +35,13 @@
         </form>
       </div>
 
+      <% if(adminUserId === user_id) { %>
       <form action="/mark_sold" method="POST">
         <input name="product_id" value="<%= id %>" hidden>
-        <button type="submit">Sold</button>
+        <button id="sold-button" type="submit">Sold</button>
       </form>
+      <div id="sold-message" style="display: none;">Sold Message</div>
+      <% } %>
 
     </section>
     <section class="description">
