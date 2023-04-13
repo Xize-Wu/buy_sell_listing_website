@@ -40,6 +40,14 @@ const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 const logoutRoutes = require('./routes/logout');
 const newlistingRoutes = require('./routes/my_listing_form');
+const showRoutes = require('./routes/show');
+const cartRoutes = require('./routes/cart')
+const checkoutRoutes = require('./routes/checkout')
+const orderRoutes = require('./routes/orders');
+const favouritesRoutes = require('./routes/favourites');
+const listingsRoutes = require('./routes/listings');
+const searchRoutes = require('./routes/search');
+// const markSoldRoutes = require('./routes/mark_sold')
 
 
 // Mount all resource routes
@@ -53,7 +61,16 @@ app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
 app.use('/search',userApiRoutes);
 app.use('/my_listing_form', newlistingRoutes);
+app.use('/show', showRoutes);
+app.use('/cart', cartRoutes);
+app.use('/checkout',checkoutRoutes);
+app.use('/orders', orderRoutes);
+app.use('/favourites', favouritesRoutes);
+app.use('/listings', listingsRoutes);
+app.use('/search', searchRoutes);
+// app.use('/mark_sold', markSoldRoutes)
 // Note: mount other resources here, using the same pattern above
+// 
 
 // Home page
 // Warning: avoid creating more routes in this file!

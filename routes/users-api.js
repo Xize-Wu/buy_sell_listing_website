@@ -12,39 +12,42 @@ const userQueries = require('../db/queries/users');
 // Home route
 router.get('/', (req, res) => {
   userQueries.getAllProducts()
-    .then(products => {
-      console.log("show something", products)
-      const templateVars = {
-        products,
-        username: req.session.username
-      };
-      res.render('index', templateVars);
+    .then(productsResult => {
+      const user_id = req.session.userId;
+
+      userQueries.getAllFavourites(user_id)
+      .then(favourites => {
+        const favouriteTracker = {};
+
+        // { product_id: 1}
+        // map between product id and favourite id.
+        // we get list of products and then we get list of user favourite products
+        //// combine both by assigning favourite id to product
+                                                        // 1                     1
+        favourites.forEach(favourite => favouriteTracker[favourite.product_id] = favourite.id)
+
+        // cloned the product, add favourite_id key and assigning that value to key
+        const products = productsResult.map(product => ({...product, favourite_id: favouriteTracker[product.id]}))
+
+        const templateVars = {
+          products,
+          username: req.session.username
+        };
+
+        res.render('index', templateVars);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      })
+
     })
     .catch(err => {
       res
         .status(500)
         .json({ error: err.message });
     });
-});
-
-// search form
-router.post('/search', (req, res) => {
-
-   userQueries.searchBooksByPrice(req.body)
-  .then ((products) => {
-      const templateVars = {
-        products,
-        username: req.session.username
-      };
-      res.render('product', templateVars);
-    })
-  .catch((error) => {
-    console.log(error);
-  })
-});
-
-router.get('/search', (req, res) => {
-  res.render('search');
 });
 
 module.exports = router;

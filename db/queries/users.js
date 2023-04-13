@@ -1,18 +1,18 @@
 const db = require('../connection');
 
-const getAllProducts = (options, limit = 10) => {
+const getAllProducts = (limit = 10) => {
   return db.query(`
-  SELECT users.name, title, picture_url, price, condition, category, products.created_at as posted_time
+  SELECT DISTINCT sellers.name, products.id, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
   FROM products
-  JOIN users ON user_id = users.id
-  GROUP BY users.name, title, picture_url, price, condition, category, posted_time
-  ORDER BY posted_time DESC;
-  `)
+  JOIN users AS sellers ON user_id = sellers.id
+  ORDER BY posted_time DESC
+  LIMIT $1;
+  `, [limit])
     .then((result) => {
       return result.rows;
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error.message);
     });
 };
 
@@ -30,12 +30,60 @@ const storeUserInformation = function (name, email, password) {
   return db
     .query(`
   INSERT INTO users (name, email, password)
-  VALUES ($1, $2, $3) RETURNING *`,
-      [name, email, password]
-    );
+  VALUES ($1, $2, $3) RETURNING *`
+    ,[name, email, password]);
 };
 
-const searchBooksByPrice = function (options, limit = 10) {
+const getAllOrders = function(userId) {
+  return db.query(`
+  SELECT orders.id, orders.purchase_time, products.title, products.thumbnail_url, (products.price/100) AS dollar
+  FROM orders
+  JOIN products ON orders.product_id = products.id
+  JOIN users ON orders.user_id = users.id
+  WHERE users.id = $1 AND orders.purchased = TRUE AND orders.removed = FALSE
+  ORDER BY purchase_time DESC;
+  `, [userId])
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
+};
+
+const getAllFavourites = function(userId) {
+  return db.query(`
+  SELECT favourites.id, title, description, products.id AS product_id, picture_url, (price/100) AS dollar, condition, category
+  FROM favourites
+  JOIN products ON product_id = products.id
+  WHERE favourites.user_id = $1
+  ORDER BY favourites.created_at;
+  `, [userId])
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
+};
+
+const getAllUSerListings = function(userId) {
+  return db.query(`
+  SELECT products.id, title, description, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
+  FROM products
+  JOIN users ON user_id = users.id
+  WHERE users.id = $1
+  ORDER BY posted_time DESC;
+  `, [userId])
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
+};
+
+const searchBooksByPrice = function(options, limit = 10) {
 
   const queryParams = [];
 
@@ -63,23 +111,36 @@ const searchBooksByPrice = function (options, limit = 10) {
 
   queryParams.push(limit);
   queryString += `
-  GROUP BY users.name, title, picture_url, price, condition, category, posted_time
   ORDER BY posted_time DESC
   LIMIT $${queryParams.length};
   `;
 
-  console.log(queryString, queryParams, options);
-
   return db.query(queryString, queryParams)
     .then((result) => {
-      console.log(result.rows);
       return result.rows;
     })
-    .catch((error) =>
-      console.log(error.message));
+    .catch((error) => {
+      console.error(error.message);
+    });
+};
+
+const addProductToFavourites = function(userId, productId) {
+  return db.query(`
+  INSERT INTO favourites (user_id, product_id)
+  VALUES ($1, $2)
+  RETURNING *
+  `, [userId, productId])
+};
+
+const removeProductFromFavourites = function(userId, productId) {
+  return db.query(`DELETE FROM favourites
+  WHERE user_id = $1
+  AND product_id = $2
+  `, [userId, productId])
 };
 
 const addListing = function (userId, products) {
+
 
   console.log('Adding listing with title:', products.title);
   const queryString = `
@@ -109,5 +170,4 @@ const addListing = function (userId, products) {
       console.error(error.message);
     });
 };
-
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, searchBooksByPrice, addListing };
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice, addProductToFavourites, removeProductFromFavourites };
