@@ -33,14 +33,13 @@
           <div id="order-time" class="orders-summary"><%= order.purchase_time %></div>
 
           <div id="orders-summary">
-            <h4 class="orders-summary-information">Summary of Order</h4>
             <div class="orders-summary-information"><%= order.title %></div>
             <img class="orders-summary-information"src="<%= order.picture_url %>" alt="Product Image">
           </div>
 
         </div>
 
-        <div class="orders-information-container-children" id="orders-price">Price: <%= order.price %></div>
+        <div class="orders-information-container-children" id="orders-price">$ <%= order.dollar %></div>
       </section>
 
       <% } %>

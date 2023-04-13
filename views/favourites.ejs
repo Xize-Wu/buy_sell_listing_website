@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="/styles/layout.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
+  <script defer src="/scripts/favouritesList.js"></script>
+  <style>img{ max-width: 25% }</style>
   <title>Favourites</title>
 </head>
 <body>
@@ -23,17 +24,23 @@
 
     <section id="favourites-summary-container">
       <% for (let favourite of favourites) { %>
-        <div class="favourite-summary-container-children" id="favourites-book-title"><%= favourite.title %></div>
-        <img class="favourite-summary-container-children" src="<%= favourite.picture_url %>" alt="Product Image">
+        <div data-product="<%= favourite.product_id %>">
+          <div class="favourite-summary-container-children" id="favourites-book-title"><%= favourite.title %></div>
+          <img class="favourite-summary-container-children" src="<%= favourite.picture_url %>" alt="Product Image">
 
-        <div class="favourite-summary-container-children">
-          <div id="favourite-price">Price: <%= favourite.price %></div>
-          <div id="favourite-condition">Condition: <%= favourite.condition %></div>
-          <div id="favourite-category">Category:<%= favourite.category %></div>
+          <div class="favourite-summary-container-children">
+            <div id="favourite-price">$ <%= favourite.dollar %></div>
+            <div id="favourite-condition">Condition: <%= favourite.condition %></div>
+            <div id="favourite-category">Category:<%= favourite.category %></div>
+          </div>
+
+          <form method="post" action="/favourites/remove">
+            <input name="product_id" value="<%= favourite.product_id %>" hidden>
+            <button type="submit">Remove</button>
+          </form>
         </div>
         <% } %>
     </section>
-
   </div>
 
 </body>
