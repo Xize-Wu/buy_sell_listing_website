@@ -14,21 +14,19 @@ router.get('/myLists', (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  console.log('req.body', req.body)
   const userId = req.session.userId;
-  if (!userId) {
-    return res.send({ error: "error" });
-  }
-
   const newListing = req.body;
 
   userQueries
     .addListing(userId, newListing)
-    .then((products) => {
-      res.send(products);
+    .then((newListing) => {
+
+      res.redirect("/");
     })
-    .catch((e) => {
-      console.error(e);
-      res.send(e);
+    .catch((error) => {
+      console.error(error.message);
+      res.send(error);
     }); 
 });
 
