@@ -15,44 +15,64 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
-  <style>img{ max-width: 25% }</style>
+  <style>
+    img {
+      max-width: 25%
+    }
+  </style>
 </head>
 
 <body>
   <%- include('partials/_header') %>
 
-  <main id="main-content">
+    <main id="main-content">
 
-    <div>
-      <h1>My Listings</h1>
-    </div>
-    
-    <% for (let listing of listings) { %>
+      <div>
+        <h1>My Listings</h1>
+      </div>
+
+      <% for (let listing of listings) { %>
         <section id="listings-container">
 
           <div class="listings-container-children">
-            <h4 id="listings-id"><%= listing.id %></h4>
-            <div id="listing-time"><%= listing.posted_time %></div>
+            <h4 id="listings-id">
+              <%= listing.id %>
+            </h4>
+            <div id="listing-time">
+              <%= listing.posted_time %>
+            </div>
           </div>
 
-          <img id="listings-picture" class="listings-container-children" src="<%= listing.picutre_url %>" alt="Product Image">
-          <h3 id="listings-book-name" class="listings-container-children"><%= listing.title %></h3>
+          <img id="listings-picture" class="listings-container-children" src="<%= listing.picutre_url %>"
+            alt="Product Image">
+          <h3 id="listings-book-name" class="listings-container-children">
+            <%= listing.title %>
+          </h3>
 
           <div class="listings-container-children">
-            <div id="listings-price">$ <%= listing.dollar %></div>
-            <div id="listings-condition">Condition: <%= listing.condition %></div>
-            <div id="listings-category">Category:<%= listing.category %></div>
+            <div id="listings-price">$ <%= listing.dollar %>
+            </div>
+            <div id="listings-condition">Condition: <%= listing.condition %>
+            </div>
+            <div id="listings-category">Category:<%= listing.category %>
+            </div>
           </div>
-          <% if (listing.user_id === userId) { %>
-          <form action="/mark_sold" method="POST">
-            <% if (!listing.available) { %>
-            <p>Item is sold!</p>
-            <% } else { %>
+
+          <% if (listing.user_id===userId) { %>
+            <form method="post" action="/deleteListing">
               <input name="product_id" value="<%= listing.id %>" hidden>
-              <button id="sold-button" type="submit">Sold</button>
-              <% } %>
-          </form>
-          <% } %>
+              <button type="submit">Delete</button>
+            </form>
+
+            <form action="/mark_sold" method="POST">
+              <% if (!listing.available) { %>
+                <p>Item is sold!</p>
+                <% } else { %>
+                  <input name="product_id" value="<%= listing.id %>" hidden>
+                  <button id="sold-button" type="submit">Sold</button>
+                  <% } %>
+            </form>
+            <% } %>
         </section>
         <% } %>
 
