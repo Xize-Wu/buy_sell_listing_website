@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Message Box</title>
+</head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+
+<script src="../public/scripts/show.js"></script>
+</head>
+<body class="container">
+
+<header>
+</header>
+
+<main>
+<div><H1>Message Box</H1></div>
+
+<section>
+
+  <table>
+    <% for (const row of data) {%>
+    <tr>
+
+      <td>
+       <a href="/message/<%= row.id%>"> <%= row.title%> </a>
+      </td>
+
+    </tr>
+    <% }%>
+  </table>
+
+</section>
+</main>
+<footer>
+  <!-- Footer missing -->
+</footer>
+
+</body>
+</html>

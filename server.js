@@ -47,6 +47,8 @@ const orderRoutes = require('./routes/orders');
 const favouritesRoutes = require('./routes/favourites');
 const listingsRoutes = require('./routes/listings');
 const searchRoutes = require('./routes/search');
+const messageRoutes = require('./routes/message');
+// const markSoldRoutes = require('./routes/mark_sold')
 const newlistingRoutes = require('./routes/my_listing_form');
 const markSoldRoutes = require('./routes/mark_sold');
 const deleteListingRoutes = require('./routes/deleteListing');
@@ -70,6 +72,8 @@ app.use('/orders', orderRoutes);
 app.use('/favourites', favouritesRoutes);
 app.use('/listings', listingsRoutes);
 app.use('/search', searchRoutes);
+app.use('/message', messageRoutes)
+// app.use('/mark_sold', markSoldRoutes)
 app.use('/my_listing_form', newlistingRoutes);
 app.use('/mark_sold', markSoldRoutes);
 app.use('/deleteListing', deleteListingRoutes);
