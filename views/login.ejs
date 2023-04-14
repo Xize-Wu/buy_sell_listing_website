@@ -11,6 +11,15 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/login.css" />
 
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Raleway:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap"
+    rel="stylesheet">
+
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
@@ -19,27 +28,27 @@
 <body>
   <%- include('partials/_header') %>
 
-  <div class="login-container">
-    <h1>Login</h1>
-    <form action="/login" method="POST">
+    <div class="login-container">
+      <h1 id="login-route">Login</h1>
+      <form action="/login" method="POST">
 
-      <div class="form-group">
-        <label name="email">Email: </label>
-        <input type="email" name="email" id="email" placeholder="Please enter your email">
-      </div>
+        <div class="form-group">
+          <label name="email">Email: </label>
+          <input type="email" name="email" id="email" placeholder="Please enter your email">
+        </div>
 
-      <div class="form-group">
-        <label name="password">Password: </label>
-        <input type="password" name="password" id="password" placeholder="Please enter your password">
-      </div>
+        <div class="form-group">
+          <label name="password">Password: </label>
+          <input type="password" name="password" id="password" placeholder="Please enter your password">
+        </div>
 
-      <div id="login-button">
-        <button type="submit">Login</button>
-      </div>
-    </form>
-    <div>Create an account <a href="/register">here</a></div>
-    
-  </div>
+        <div id="login-button">
+          <button type="submit">Login</button>
+        </div>
+      </form>
+      <div><a href="/register">Create an account here</a></div>
+
+    </div>
 
 </body>
 

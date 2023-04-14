@@ -1,15 +1,26 @@
-
 .login-container {
-    margin: 146px;
-    max-width: 565px;
-    padding: 122px;
-    border-radius: 10px;
-   
+  // margin: 146px auto;
+  // background-color: #aa998f;
+  // max-width: 565px;
+  // padding: 122px;
+  // border-radius: 10px;
+  margin: 146px auto;
+  background-color: #aa998f;
+  max-width: 565px;
+  padding-right: 15%;
+  border-radius: 10px;
+  padding-left: 15%;
+  padding-bottom: 7%;
+  padding-top: 7%;
 }
 
+#login-route {
+  font-family: Montserrat Alternates;
+}
 
 .form-group {
   margin-bottom: 20px;
+  outline: none;
 }
 
 .form-group label {
@@ -24,9 +35,9 @@
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 9px;
   font-size: 16px;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 #login-button {
@@ -41,9 +52,16 @@
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 #login-button button:hover {
   background-color: #555;
+}
+
+#create_account {
+  padding: 13px 63px;
+}
+
+#create_account a {
+  color: blue;
 }
