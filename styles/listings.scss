@@ -1,0 +1,61 @@
+#listings-container {
+  background-color: #aa998f;
+  width: 70%;
+  margin-bottom: 5%;
+  border-radius: 1%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 2.5%;
+}
+
+#listings-container-children {
+ padding-bottom: 5%;
+}
+
+#listings-id {
+  margin-bottom: 0%;
+  font-family: Nunito;
+  font-weight: 600;
+  font-size: larger;
+}
+
+#listings-book-name {
+  margin-bottom: 1%;
+}
+
+#listings-category {
+  padding-bottom: 2%;
+
+}
+
+#listings-picture {
+  padding-top: 3%;
+}
+
+.delete-sold-buttons {
+  margin-top: 2%;
+  padding: 1% 1%;
+  font-family: Nunito;
+  font-size: medium;
+  font-weight: 300;
+  background-color: #484242;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+#listings-book-name {
+  font-family: Montserrat Alternates;
+  font-weight: 500;
+  font-size: x-large;
+}
+
+.listing-nunito-font {
+  font-family: Nunito;
+  font-weight: 300;
+  font-size: medium;
+}
+
+
