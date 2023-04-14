@@ -15,4 +15,4 @@ const markSold = function(productId) {
   })
 };
 
-module.exports = {getAdminUserIdWithProduct, markSold}
+module.exports = { markSold }
