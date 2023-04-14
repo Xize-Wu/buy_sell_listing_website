@@ -26,7 +26,11 @@
       <div id ="item-price"><%= price %> </div>
       <div id ="seller"><%= seller %></div>
       <form method="post" action = "/message">
-      <div class = "button" id ="message-button"><button type="submit" class ="button" id="purchase-button">Message Me</button></div>
+
+      <div class = "button" id ="message-button">
+        <input name="product_id" value="<%= id %>" hidden>
+        <button type="submit" class ="button" id="purchase-button">Message Me</button>
+      </div>
      </form>
 
       <div class ="button" id="purchase-button">
