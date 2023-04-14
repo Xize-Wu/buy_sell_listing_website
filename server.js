@@ -61,14 +61,13 @@ app.use('/users', usersRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
-app.use('/search',userApiRoutes);
 app.use('/show', showRoutes);
 app.use('/cart', cartRoutes);
 app.use('/checkout',checkoutRoutes);
 app.use('/orders', orderRoutes);
 app.use('/favourites', favouritesRoutes);
 app.use('/listings', listingsRoutes);
-app.use('/search', searchRoutes);
+app.use('/search',searchRoutes);
 app.use('/message', messageRoutes)
 app.use('/my_listing_form', newlistingRoutes);
 app.use('/mark_sold', markSoldRoutes);

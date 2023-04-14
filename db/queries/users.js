@@ -83,7 +83,7 @@ const getAllUSerListings = function(userId) {
     });
 };
 
-const searchBooksByPrice = function(options, limit = 10) {
+const searchBooksByPrice = function (options, limit = 10) {
 
   const queryParams = [];
 
@@ -111,17 +111,20 @@ const searchBooksByPrice = function(options, limit = 10) {
 
   queryParams.push(limit);
   queryString += `
+  GROUP BY users.name, title, picture_url, price, condition, category, posted_time
   ORDER BY posted_time DESC
   LIMIT $${queryParams.length};
   `;
 
+  console.log(queryString, queryParams, options);
+
   return db.query(queryString, queryParams)
     .then((result) => {
+      console.log(result.rows);
       return result.rows;
     })
-    .catch((error) => {
-      console.error(error.message);
-    });
+    .catch((error) =>
+      console.log(error.message));
 };
 
 const addProductToFavourites = function(userId, productId) {
@@ -145,7 +148,7 @@ const addListing = function (userId, products) {
 
   console.log('Adding listing with title:', products.title);
   const queryString = `
-    INSERT INTO products (user_id, title, description, picture_url, thumbnail_url, price, condition, category)
+    INSERT INTO products (user_id, title, description, picture_url, thumbnail_url, (price*100) AS dollar, condition, category)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *;`
 
