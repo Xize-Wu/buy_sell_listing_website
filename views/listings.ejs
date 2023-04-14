@@ -21,12 +21,13 @@
 <body>
   <%- include('partials/_header') %>
 
-    <main id="main-content">
+  <main id="main-content">
 
-      <div>
-        <h1>My Listings</h1>
-      </div>
-      <% for (let listing of listings) { %>
+    <div>
+      <h1>My Listings</h1>
+    </div>
+    
+    <% for (let listing of listings) { %>
         <section id="listings-container">
 
           <div class="listings-container-children">
@@ -42,6 +43,16 @@
             <div id="listings-condition">Condition: <%= listing.condition %></div>
             <div id="listings-category">Category:<%= listing.category %></div>
           </div>
+          <% if (listing.user_id === userId) { %>
+          <form action="/mark_sold" method="POST">
+            <% if (!listing.available) { %>
+            <p>Item is sold!</p>
+            <% } else { %>
+              <input name="product_id" value="<%= listing.id %>" hidden>
+              <button id="sold-button" type="submit">Sold</button>
+              <% } %>
+          </form>
+          <% } %>
         </section>
         <% } %>
 
