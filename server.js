@@ -49,6 +49,9 @@ const listingsRoutes = require('./routes/listings');
 const searchRoutes = require('./routes/search');
 const messageRoutes = require('./routes/message');
 // const markSoldRoutes = require('./routes/mark_sold')
+const newlistingRoutes = require('./routes/my_listing_form');
+const markSoldRoutes = require('./routes/mark_sold');
+const deleteListingRoutes = require('./routes/deleteListing');
 
 
 // Mount all resource routes
@@ -71,8 +74,11 @@ app.use('/listings', listingsRoutes);
 app.use('/search', searchRoutes);
 app.use('/message', messageRoutes)
 // app.use('/mark_sold', markSoldRoutes)
+app.use('/my_listing_form', newlistingRoutes);
+app.use('/mark_sold', markSoldRoutes);
+app.use('/deleteListing', deleteListingRoutes);
 // Note: mount other resources here, using the same pattern above
-// 
+//
 
 // Home page
 // Warning: avoid creating more routes in this file!

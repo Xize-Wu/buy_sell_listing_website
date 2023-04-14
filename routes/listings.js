@@ -16,7 +16,8 @@ router.get('/', (req, res) => {
 
     const templateVars = {
       listings,
-      username: req.session.username
+      username: req.session.username,
+      userId: req.session.userId
     }
 
     res.render('listings', templateVars);
