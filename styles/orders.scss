@@ -1,0 +1,53 @@
+#orders-container {
+  margin-top: 12%;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+}
+
+#orders-title-page {
+  margin-left: 15%;
+  font-family: Nunito;
+  font-weight: 700;
+  font-size: x-large;
+}
+#orders-section-container {
+  padding-bottom: 2.5%;
+  margin-left: 15%;
+  width: 70%;
+  display: flex;
+  background-color: #aa998f;
+  flex-direction: column;
+  margin-bottom: 3%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#orders-id {
+  margin-bottom: 0%;
+  font-family: Nunito;
+  font-weight: 500;
+  font-size: large;
+  padding-bottom: 2%;
+}
+
+#orders-book-name {
+  font-family: Montserrat Alternates;
+  font-weight: 300;
+  font-size: medium;
+  padding-bottom: 2%;
+}
+
+#orders-time {
+  font-family: Nunito;
+  font-weight: 300;
+  font-size: medium;
+  padding-bottom: 2%;
+}
+
+#orders-cost {
+  font-family: Nunito;
+  font-weight: 600;
+  font-size: large;
+}
+
