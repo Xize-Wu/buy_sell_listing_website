@@ -2,8 +2,8 @@ const db = require('../connection');
 
 const addBookToCart = function(user_id, product_id) {
   return db.query('INSERT INTO orders (user_id, product_id) VALUES($1, $2) returning *', [user_id, product_id])
-    .then((data) => {
-      data.rows[0];
+    .then(res => {
+      res.rows[0];
     })
     .catch(err => console.error('query error', err.message));
 };

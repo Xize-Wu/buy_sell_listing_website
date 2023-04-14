@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Message Session</title>
+</head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+
+<script src="../public/scripts/show.js"></script>
+</head>
+<body class="container">
+
+<header>
+  <!-- Header missing -->
+</header>
+
+<main>
+<div><H1>Messages</H1></div>
+
+<section>
+  <table>
+    <% for (const row of data) {%>
+    <tr>
+      <td>
+        <%= row.name%>
+      </td>
+      <td>
+        <%= row.message%>
+      </td>
+    </tr>
+    <%}%>
+  </table>
+
+</section>
+<form method="post" action="/message/(THE SESSION ID)">
+  <input id ="message_box" name="message_text">
+  <button type="submit">Send</button>
+</form>
+
+</main>
+<footer>
+  <!-- Footer missing -->
+</footer>
+
+</body>
+</html>
