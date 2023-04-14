@@ -62,7 +62,6 @@ app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/logout', logoutRoutes);
 app.use('/search',userApiRoutes);
-app.use('/my_listing_form', newlistingRoutes);
 app.use('/show', showRoutes);
 app.use('/cart', cartRoutes);
 app.use('/checkout',checkoutRoutes);
@@ -74,17 +73,8 @@ app.use('/my_listing_form', newlistingRoutes);
 app.use('/mark_sold', markSoldRoutes);
 app.use('/deleteListing', deleteListingRoutes);
 // Note: mount other resources here, using the same pattern above
-//
 
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
 
-// Our home page is in users-api.js --> will ask mentor
-
-// app.get('/', (req, res) => {
-//   res.render('index');
-// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
