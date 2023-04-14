@@ -39,7 +39,6 @@ const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 const logoutRoutes = require('./routes/logout');
-const newlistingRoutes = require('./routes/my_listing_form');
 const showRoutes = require('./routes/show');
 const cartRoutes = require('./routes/cart')
 const checkoutRoutes = require('./routes/checkout')
