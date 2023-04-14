@@ -31,7 +31,8 @@ router.get('/', (req, res) => {
 
         const templateVars = {
           products,
-          username: req.session.username
+          username: req.session.username,
+          user_id: req.session.userId
         };
 
         res.render('index', templateVars);
