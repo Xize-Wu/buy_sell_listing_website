@@ -144,11 +144,12 @@ const addListing = function (userId, products) {
 
   console.log('Adding listing with title:', products.title);
   const queryString = `
-    INSERT INTO products (title, description, picture_url, thumbnail_url, price, condition, category)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
-    RETURNING *;`;
+    INSERT INTO products (user_id, title, description, picture_url, thumbnail_url, price, condition, category)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    RETURNING *;`
 
   const values = [
+    userId,
     products.title,
     products.description,
     products.image,
@@ -170,4 +171,4 @@ const addListing = function (userId, products) {
       console.error(error.message);
     });
 };
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice, addProductToFavourites, removeProductFromFavourites };
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice, addProductToFavourites, removeProductFromFavourites, addListing };
