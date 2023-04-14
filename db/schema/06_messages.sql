@@ -9,3 +9,5 @@ CREATE TABLE messages (
  message TEXT,
  created_at TIMESTAMP DEFAULT NOW()
 );
+
+----POST REQUEST: sender_id; session_id; product_id; session_id
