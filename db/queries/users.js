@@ -2,9 +2,9 @@ const db = require('../connection');
 
 const getAllProducts = (limit = 10) => {
   return db.query(`
-  SELECT users.name, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
+  SELECT DISTINCT sellers.name, products.id, title, picture_url, (price/100) AS dollar, condition, category, products.created_at as posted_time
   FROM products
-  JOIN users ON user_id = users.id
+  JOIN users AS sellers ON user_id = sellers.id
   ORDER BY posted_time DESC
   LIMIT $1;
   `, [limit])
@@ -16,7 +16,7 @@ const getAllProducts = (limit = 10) => {
     });
 };
 
-const getUserWithEmail = function(email) {
+const getUserWithEmail = function (email) {
   return db.query(`SELECT * FROM users WHERE email = $1`, [email.toLowerCase()])
     .then((result) => {
       return result.rows[0];
@@ -26,7 +26,7 @@ const getUserWithEmail = function(email) {
     });
 };
 
-const storeUserInformation = function(name, email, password) {
+const storeUserInformation = function (name, email, password) {
   return db
     .query(`
   INSERT INTO users (name, email, password)
@@ -53,7 +53,7 @@ const getAllOrders = function(userId) {
 
 const getAllFavourites = function(userId) {
   return db.query(`
-  SELECT favourites.id, title, description, products.id, picture_url, (price/100) AS dollar, condition, category
+  SELECT favourites.id, title, description, products.id AS product_id, picture_url, (price/100) AS dollar, condition, category
   FROM favourites
   JOIN products ON product_id = products.id
   WHERE favourites.user_id = $1
@@ -124,4 +124,51 @@ const searchBooksByPrice = function(options, limit = 10) {
     });
 };
 
-module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice };
+const addProductToFavourites = function(userId, productId) {
+  return db.query(`
+  INSERT INTO favourites (user_id, product_id)
+  VALUES ($1, $2)
+  RETURNING *
+  `, [userId, productId])
+};
+
+const removeProductFromFavourites = function(userId, productId) {
+  return db.query(`DELETE FROM favourites
+  WHERE user_id = $1
+  AND product_id = $2
+  `, [userId, productId])
+};
+
+const addListing = function (userId, products) {
+
+
+  console.log('Adding listing with title:', products.title);
+  const queryString = `
+    INSERT INTO products (user_id, title, description, picture_url, thumbnail_url, price, condition, category)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    RETURNING *;`
+
+  const values = [
+    userId,
+    products.title,
+    products.description,
+    products.image,
+    products.thumbnail_image,
+    products.price,
+    products.bookcondition,
+    products.bookcategory,
+    
+  ];
+  console.log('Querying the database with values:', values);
+  return db
+    .query(queryString, values)
+    .then((result) => {
+      console.log('Listing added successfully:', result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((error) => {
+      
+      console.error(error.message);
+    });
+};
+module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice, addProductToFavourites, removeProductFromFavourites, addListing };

@@ -8,6 +8,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
@@ -15,6 +19,8 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+  <script src="/scripts/addToFavourites.js"></script>
+  <style>img{ max-width: 25% }</style>
 </head>
 
 <body>
@@ -25,21 +31,29 @@
       <div id="home-page-title">
         <h1>Latest Posts</h1>
       </div>
+
       <% for (let product of products) { %>
         <section class="home-page-container">
+
           <div class="home-page-container-children">
             <h4 id="home-page-username"><%= product.name %></h4>
             <div id="home-page-time"><%= product.posted_time %></div>
           </div>
 
-          <img id="home-page-picture" class="home-page-container-children" src="<%= %>" alt="Product Image">
-          <h3 id="home-page-book-name" class="home-page-container-children"><%= product.title %></h3>
+          <a id="home-page-book-name" class="home-page-container-children" href="/show/<%= product.id %>"><%= product.title %></a>
+          <img id="home-page-picture" class="home-page-container-children" src="<%= product.picture_url %>" alt="Product Image">
 
           <div class="home-page-container-children">
-            <div id="home-page-price">$ <%= product.dollar %></div>
-            <div id="home-page-condition">Condition: <%= product.condition %></div>
-            <div id="home-page-category">Category:<%= product.category %></div>
+            <div class="home-page-price">$ <%= product.dollar %></div>
+            <div class="home-page-condition">Condition: <%= product.condition %></div>
+            <div class="home-page-category">Category:<%= product.category %></div>
+            <% if (username) { %>
+            <form action="/favourites" method="POST">
+              <i class="fa-solid fa-heart add-to-favourites <%= product.favourite_id ? "favourite-red" : "" %>" id="product-<%= product.id %>" data-id="<%= product.id %>"></i>
+            </form>
+            <% } %>
           </div>
+
         </section>
         <% } %>
 

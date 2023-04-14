@@ -5,5 +5,6 @@ CREATE TABLE favourites (
  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
  product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
- deleted_at TIMESTAMP
+ deleted_at TIMESTAMP,
+ unique (user_id, product_id)
 );

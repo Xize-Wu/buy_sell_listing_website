@@ -37,6 +37,13 @@ router.post('/remove', (req, res) => {
     return res.status(400).send("Error: Please log in.");
   }
   removeBookFromCart(uid,pid)
+  .then(response => {
+    console.log(response.rows)
+    res.send(200, { message: 'ok' });
+  })
+  .catch(error => {
+    console.error(error.message);
+  })
   res.redirect('/cart');
 })
 
