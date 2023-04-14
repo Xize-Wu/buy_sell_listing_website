@@ -36,7 +36,7 @@ const storeUserInformation = function (name, email, password) {
 
 const getAllOrders = function(userId) {
   return db.query(`
-  SELECT orders.id, orders.purchase_time, products.title, products.thumbnail_url, (products.price/100) AS dollar
+  SELECT orders.id, to_char(orders.purchase_time, 'Dy Mon DD YYYY HH:MI:SS') as purchase_time, products.title, products.thumbnail_url, (products.price/100) AS dollar
   FROM orders
   JOIN products ON orders.product_id = products.id
   JOIN users ON orders.user_id = users.id
