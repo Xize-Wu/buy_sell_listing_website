@@ -144,11 +144,9 @@ const removeProductFromFavourites = function(userId, productId) {
 
 
 const addListing = function (userId, products) {
-
-
   console.log('Adding listing with title:', products.title);
   const queryString = `
-    INSERT INTO products (user_id, title, description, picture_url, thumbnail_url, (price*100) AS dollar, condition, category)
+    INSERT INTO products (user_id, title, description, picture_url, thumbnail_url, price, condition, category)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *;`
 
@@ -158,7 +156,7 @@ const addListing = function (userId, products) {
     products.description,
     products.image,
     products.thumbnail_image,
-    products.price,
+    products.price*100,
     products.bookcondition,
     products.bookcategory,
     
