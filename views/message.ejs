@@ -5,40 +5,43 @@
   <title>Message Session</title>
 </head>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css%22%3E
 
 <script src="../public/scripts/show.js"></script>
 </head>
 <body class="container">
 
 <header>
-  <!-- Header missing -->
+
 </header>
 
 <main>
-<div><H1>Messages</H1></div>
+  <main style="padding: 20px; background-color: beige">
+    <div style="padding: 20px; text-align: center;">
+      <h1><b>Messages</b></h1>
+    </div>
 
-<section>
-  <table>
-    <% for (const row of data) {%>
-    <tr>
-      <td>
-        <%= row.name%>
-      </td>
-      <td>
-        <%= row.message%>
-      </td>
-    </tr>
-    <%}%>
-  </table>
+    <!-- Only outer border for the section -->
+    <section class="message-display"; style="padding-top: 20px; border: 1px solid grey;">
+      <table style="width: 80%; border-collapse: collapse;">
+        <% for (const row of data) { %>
+        <tr>
+          <td style="padding: 15px; text-align: center;">
+            <%= row.name %>
+          </td>
+          <td style="padding: 15px;">
+            <%= row.message %>
+          </td>
+        </tr>
+        <% } %>
+      </table>
+    </section>
 
-</section>
-<form method="post" action="/message/1 %>">
-  <input id ="message_box" name="message_text">
-  <button type="submit">Send</button>
-</form>
-
-</main>
+    <form style="padding-top: 20px; padding-bottom: 25px;text-align: center;" method="post" action="/message/1">
+      <input style="width: 80%; padding: 10px; margin: 10px; border: 1px solid grey;" id="message_box" name="message_text">
+      <button style="padding: 10px; border: none; background-color: #a14242; color: white;" type="submit">Send</button>
+    </form>
+  </main>
 <footer>
   <!-- Footer missing -->
 </footer>
