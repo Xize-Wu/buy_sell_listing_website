@@ -69,7 +69,7 @@ const getAllFavourites = function(userId) {
 
 const getAllUSerListings = function(userId) {
   return db.query(`
-  SELECT products.id, title, description, picture_url, (price/100) AS dollar, condition, category, user_id, products.created_at as posted_time, available
+  SELECT products.id, title, description, picture_url, (price/100) AS dollar, condition, category, user_id, to_char(DATE(products.created_at), 'YYYY-MM-DD') as posted_time, available
   FROM products
   JOIN users ON user_id = users.id
   WHERE users.id = $1
