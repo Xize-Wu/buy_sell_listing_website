@@ -3,20 +3,12 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   // align-items: center;
-  min-height: 100vh;
- background-color: #faf6f6;
-
+  min-height: 120vh;
+  background-color: #faf6f6;
 }
 
 .favourite-red {
-  color: #7d4f50;
-}
-
-
-
-#main-content {
-  background-color: #faf6f6;
-  padding-top: 50px;
+  color: #8a5657;
 }
 
 .parent-nav {
@@ -24,14 +16,106 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #aa998f;
+  background-color: #746258;
   position: fixed;
+}
+
+.navbar-brand {
+  font-family: Montserrat Alternates;
+  font-weight: 500;
+  font-size: xx-large;
+}
+
+.navbar-font-family {
+  font-family: Nunito;
+  font-weight: 300;
+  font-size: medium;
 }
 
 a:visited {
   color: inherit;
 }
 
+a {
+  text-decoration: none;
+}
+
+#greeting-username {
+  font-family: Montserrat Alternates;
+  font-weight: 300;
+  font-size: medium;
+  font-style: italic;
+}
+
+#logout-button {
+  font-family: Nunito;
+  font-size: medium;
+  font-weight: 300;
+  padding: 10% 1em;
+  background-color: #484242;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 header {
   width: 100vw;
 }
+
+#main-content {
+  background-color: #faf6f6;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-page-container {
+  background-color: #aa998f;
+  width: 70%;
+  margin-bottom: 5%;
+  border-radius: 1%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#home-page-username {
+  margin-bottom: 0%;
+  font-size: larger;
+}
+
+#home-page-time {
+  font-size: smaller;
+  margin-bottom: 3%;
+  font-family: Nunito;
+  font-weight: 300;
+}
+
+#home-page-book-name {
+  font-family: Montserrat Alternates;
+  font-weight: 700;
+  font-size: xx-large;
+}
+
+#home-page-picture {
+  padding-top: 2%;
+}
+
+#bookname-picture {
+  display: flex;
+  flex-direction: column;
+}
+
+.nunito-font-home-page {
+  font-family: Nunito;
+  font-weight: 400;
+  font-size: medium;
+}
+
+.fa-heart {
+  margin-bottom: 3%;
+}
+
+
+

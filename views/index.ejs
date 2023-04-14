@@ -16,11 +16,25 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Raleway:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap"
+    rel="stylesheet">
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
   <script src="/scripts/addToFavourites.js"></script>
-  <style>img{ max-width: 25% }</style>
+  <style>
+    img {
+      max-width: 29%
+    }
+  </style>
 </head>
 
 <body>
@@ -29,38 +43,50 @@
     <%- include('partials/_header') %>
   </header>
 
-    <main id="main-content">
+  <main id="main-content">
 
-      <div id="home-page-title">
-        <h1>Latest Posts</h1>
-      </div>
+    <div id="home-page-title">
+      <h1>Latest Posts</h1>
+    </div>
 
-      <% for (let product of products) { %>
-        <section class="home-page-container">
+    <% for (let product of products) { %>
+      <section class="home-page-container">
 
-          <div class="home-page-container-children">
-            <h4 id="home-page-username"><%= product.name %></h4>
-            <div id="home-page-time"><%= product.posted_time %></div>
+        <div id="username-time">
+          <h4 id="home-page-username">
+            <%= product.name %>
+          </h4>
+          <div id="home-page-time">
+            <%= product.posted_time %>
           </div>
+        </div>
 
-          <a id="home-page-book-name" class="home-page-container-children" href="/show/<%= product.id %>"><%= product.title %></a>
-          <img id="home-page-picture" class="home-page-container-children" src="<%= product.picture_url %>" alt="Product Image">
+        <div id="bookname-picture">
+          <a id="home-page-book-name" href="/show/<%= product.id %>">
+            <%= product.title %>
+          </a>
+          <img id="home-page-picture" src="<%= product.picture_url %>" alt="Product Image">
+        </div>
 
-          <div class="home-page-container-children">
-            <div class="home-page-price">$ <%= product.dollar %></div>
-            <div class="home-page-condition">Condition: <%= product.condition %></div>
-            <div class="home-page-category">Category:<%= product.category %></div>
-            <% if (username) { %>
+        <div>
+          <div class="nunito-font-home-page">$ <%= product.dollar %>
+          </div>
+          <div class="nunito-font-home-page">Condition: <%= product.condition %>
+          </div>
+          <div class="nunito-font-home-page">Category: <%= product.category %>
+          </div>
+          <% if (username) { %>
             <form action="/favourites" method="POST">
-              <i class="fa-solid fa-heart add-to-favourites <%= product.favourite_id ? "favourite-red" : "" %>" id="product-<%= product.id %>" data-id="<%= product.id %>"></i>
+              <i class="fa-solid fa-heart add-to-favourites <%= product.favourite_id ? " favourite-red" : "" %>"
+                id="product-<%= product.id %>" data-id="<%= product.id %>"></i>
             </form>
             <% } %>
-          </div>
+        </div>
 
-        </section>
-        <% } %>
+      </section>
+      <% } %>
 
-    </main>
+  </main>
 
 </body>
 
