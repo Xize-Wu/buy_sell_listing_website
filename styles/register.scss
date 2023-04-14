@@ -1,0 +1,63 @@
+.register-container {
+  // margin: 146px auto;
+  // background-color: d1be9c;
+  // max-width: 565px;
+  // padding: 122px;
+  // border-radius: 10px;
+  margin: 146px auto;
+  background-color: #aa998f;
+  max-width: 565px;
+  padding-right: 15%;
+  border-radius: 10px;
+  padding-left: 15%;
+  padding-bottom: 7%;
+  padding-top: 7%;
+}
+
+h2#create-account {
+  font-size: x-large;
+  font-weight: 800;
+  margin-bottom: 24px;
+  font-family: Nunito;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 8px;
+  width: 100%;
+}
+
+#register-button {
+  text-align: center;
+}
+button {
+  background-color: #333;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 88px;
+}
+
+#login {
+  padding: 37px 24px;
+}
+
+#login a{
+color: #0069d9;
+}
