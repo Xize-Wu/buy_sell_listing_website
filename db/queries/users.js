@@ -139,36 +139,34 @@ const removeProductFromFavourites = function(userId, productId) {
   `, [userId, productId])
 };
 
-const addListing = function (userId, products) {
 
-
-  console.log('Adding listing with title:', products.title);
+const addListing = function (products, userId) {
   const queryString = `
-    INSERT INTO products (user_id, title, description, picture_url, thumbnail_url, price, condition, category)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-    RETURNING *;`
+    INSERT INTO products (user_id, title, description, picture_url, price, condition, category)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    RETURNING *;`;
 
   const values = [
+
     userId,
     products.title,
     products.description,
-    products.image,
-    products.thumbnail_image,
+    products.picture_url,
     products.price,
-    products.bookcondition,
-    products.bookcategory,
-    
+    products.condition,
+    products.category,
+
   ];
-  console.log('Querying the database with values:', values);
+
   return db
     .query(queryString, values)
     .then((result) => {
-      console.log('Listing added successfully:', result.rows[0]);
       return result.rows[0];
     })
     .catch((error) => {
-      
       console.error(error.message);
     });
 };
+
+
 module.exports = { getAllProducts, getUserWithEmail, storeUserInformation, getAllOrders, getAllFavourites, getAllUSerListings, searchBooksByPrice, addProductToFavourites, removeProductFromFavourites, addListing };
